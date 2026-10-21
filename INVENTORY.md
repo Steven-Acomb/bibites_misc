@@ -161,5 +161,5 @@ The small, irreplaceable files are now in [`legacy/`](legacy/README.md).
 2. The Steam build on C was updated today. Your saves are v0.6.2.1. Back up the
    save folder before loading anything in the new version, in case it migrates
    the files.
-3. Still not copied into `legacy/` (on hold): the 2023 free-for-all tournament
-   bibites, and NeuronBox champions extracted from the final save.
+3. Still not copied into `legacy/` (on hold): NeuronBox champions extracted
+   from the final save.

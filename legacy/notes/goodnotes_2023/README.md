@@ -139,7 +139,7 @@ This is the idea that was picked back up two years later as NeuronBox (2025).
 
 ## Connections to the saved files
 
-- The **2023 "free for all" tournament bibites** (on hold, at
+- The **2023 "free for all" tournament bibites** (now in `legacy/bibites/qi1_tournament_2023/`, from
   `C:\Recovered\alpha\files\Media\Games\The Bibites\free for all\`) are exactly
   this tournament. The 32 top-level files (`36 001.bb8`, `41 002.bb8`, `60.bb8`, …)
   are the QI1 qualifier and Limbo entrants named above. Its `qualifiers\` folders
