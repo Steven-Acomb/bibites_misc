@@ -9295,7 +9295,7 @@
     "MutationAmountSigma": 0.01,
     "AverageMutationNumber": 1.0,
     "BrainMutationSigma": 0.0005,
-    "BrainAverageMutation": 40.0,
+    "BrainAverageMutation": 10.0,
     "ViewAngle": 126.9547,
     "ViewRadius": 74.91903,
     "ClockSpeed": 1.03065383,

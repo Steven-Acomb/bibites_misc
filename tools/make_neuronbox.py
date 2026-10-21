@@ -16,7 +16,7 @@ previous-tick recurrence, bias before activation).
 
 Usage:
   python tools/make_neuronbox.py <Easy Herbivore.bb8template> <layout.bb8template> <out.bb8template>
-      [--layers 3] [--width 12] [--mutations 40] [--sigma 0.0005]
+      [--layers 3] [--width 12] [--mutations 10] [--sigma 0.0005]
 
 <layout> supplies brain-viewer positions for the standard nodes (e.g. the
 hand-arranged NeuronBox_Complete).
@@ -86,7 +86,8 @@ if __name__ == "__main__":
     p.add_argument("out")
     p.add_argument("--layers", type=int, default=3)
     p.add_argument("--width", type=int, default=12)
-    p.add_argument("--mutations", type=float, default=40.0)
+    p.add_argument("--mutations", type=float, default=10.0,
+                   help="brain mutations per birth; the game caps this at 10")
     p.add_argument("--sigma", type=float, default=0.0005)
     a = p.parse_args()
     t = build(a.base, a.layout, a.out, a.layers, a.width, a.mutations, a.sigma)
