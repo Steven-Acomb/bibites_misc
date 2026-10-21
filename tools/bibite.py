@@ -99,8 +99,14 @@ class Template:
 
         Rebuilds the node list as inputs, outputs, then hidden nodes, and
         renumbers Index/Inov (remapping synapses and anchors) to match.
+
+        Files labelled version "0.6" predate RotationSpeed, and the game
+        inserts it at Index 5 on load, shifting every later node. So once it's
+        present we must relabel the file 0.6.2 or the game inserts it twice.
         """
         by_desc = {n["Desc"]: n for n in self.nodes}
+        if "RotationSpeed" not in by_desc:
+            self.data["version"] = "0.6.2"
         missing_outputs = [d for d in OUTPUTS if d not in by_desc]
         if missing_outputs:
             raise ValueError(f"template lacks outputs {missing_outputs}")

@@ -32,11 +32,12 @@ def build(base_path, layout_path, out_path, layers, width, mutations, sigma):
     t.add_missing_inputs()
     t.copy_anchors_from(Template.load(layout_path))
 
+    # Hidden-node anchor y shares units with the input column (slots ~1..32).
     box = []
     for k in range(layers):
         x = 0.25 + 0.5 * k / max(layers - 1, 1)
         box.append([t.add_node(f"L{k + 1}N{i + 1}", SINE,
-                               anchor=(x, 0.1 + 0.8 * i / max(width - 1, 1)))
+                               anchor=(x, 2.0 + 29.0 * i / max(width - 1, 1)))
                     for i in range(width)])
 
     first, last = box[0], box[-1]
