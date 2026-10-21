@@ -13,6 +13,8 @@ Verified 2026-10-21 on game v0.6.3.1 with `bibites/probes/BrainProbe.bb8template
 | **Culling:** on load the game deletes hidden nodes lacking a path from an input *and* a path to an output. Weight-0 synapses count; self-loops do not. | Probe v1 (no output links) lost all probe nodes; v2 lost the nodes with no input-side edges. |
 | **TimeAlive input is in minutes.** | Input 0.1442 at ~8.65 s alive. |
 | **Saved `.bb8` files record live state**: each node's `Value`, `LastInput`, `LastOutput`; `clock.timeAlive`. Easiest way to read a brain. | — |
+| **Version-0.6 files get RotationSpeed inserted on load** at Index 5, shifting every later node (biases, types, synapse endpoints). A file that already has RotationSpeed must say version "0.6.2" or it gets inserted twice. | NeuronBox_v2 first build: Accelerate's bias landed on Rotate → spun in place; save showed 87 nodes and a duplicate Want2Attack. |
+| **Hidden-node anchor y uses input-slot units (~1–32)**, not 0–1; x is 0 (inputs) … 1 (outputs). | v2 first build with y in 0–1 piled every hidden node at the top. |
 | **Layout (`nodeAnchors`) lives only in templates**, keyed by node Inov; in-game rearranging isn't saved to `.bb8`. The game renumbers node Inovs on load. | — |
 
 ## Self-loop regimes for a sine neuron, x → sin(w·x + input)
