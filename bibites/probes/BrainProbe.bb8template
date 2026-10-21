@@ -438,6 +438,13 @@
       "Inov": 65,
       "Desc": "Loop_w3.0",
       "baseActivation": 0.1
+    },
+    {
+      "Type": 2,
+      "Index": 62,
+      "Inov": 66,
+      "Desc": "Counter",
+      "baseActivation": 1.0
     }
   ],
   "synapses": [
@@ -653,49 +660,98 @@
     },
     {
       "Inov": 228,
+      "NodeIn": 62,
+      "NodeOut": 62,
+      "Weight": 1.0,
+      "En": true
+    },
+    {
+      "Inov": 229,
+      "NodeIn": 22,
+      "NodeOut": 58,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 230,
+      "NodeIn": 22,
+      "NodeOut": 59,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 231,
+      "NodeIn": 22,
+      "NodeOut": 60,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 232,
+      "NodeIn": 22,
+      "NodeOut": 61,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 233,
+      "NodeIn": 22,
+      "NodeOut": 62,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 234,
       "NodeIn": 55,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
     },
     {
-      "Inov": 229,
+      "Inov": 235,
       "NodeIn": 56,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
     },
     {
-      "Inov": 230,
+      "Inov": 236,
       "NodeIn": 57,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
     },
     {
-      "Inov": 231,
+      "Inov": 237,
       "NodeIn": 58,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
     },
     {
-      "Inov": 232,
+      "Inov": 238,
       "NodeIn": 59,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
     },
     {
-      "Inov": 233,
+      "Inov": 239,
       "NodeIn": 60,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
     },
     {
-      "Inov": 234,
+      "Inov": 240,
       "NodeIn": 61,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 241,
+      "NodeIn": 62,
       "NodeOut": 34,
       "Weight": 0.0,
       "En": true
@@ -985,6 +1041,10 @@
     },
     "65": {
       "x": 0.55,
+      "y": 0.45
+    },
+    "66": {
+      "x": 0.65,
       "y": 0.45
     }
   }

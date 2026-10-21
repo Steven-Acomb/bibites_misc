@@ -1,9 +1,12 @@
 """Build BrainProbe: Easy Herbivore plus side circuits that reveal how the game
 evaluates a brain. Read the probe node values in the brain viewer.
 
-The game drops hidden nodes that have no path to an output, so every probe
-readout gets a weight-0 synapse into Herding. That keeps the nodes alive
-without changing behavior: the bibite still acts exactly like Easy Herbivore.
+The game drops hidden nodes that lack a path from an input and a path to an
+output (self-loops don't count; weight-0 synapses do). So every probe node is
+fed from TimeAlive (weight 0 where it shouldn't matter) and every readout gets
+a weight-0 synapse into Herding. Behavior stays exactly Easy Herbivore's.
+
+Easiest readout: save the bibite in-game; the .bb8 records each node's Value.
 
 Usage: python tools/make_probe.py <Easy Herbivore.bb8template> <layout.bb8template> <out.bb8template>
 
@@ -57,7 +60,13 @@ def build(base_path, layout_path, out_path):
         t.connect(s, s, w)
         loops.append(s)
 
-    for readout in [d_f1, d_f3, d_r3, bias, *loops]:
+    # Counter: x -> x + 1 each brain tick if loops feed back last tick's value.
+    counter = t.add_node("Counter", LINEAR, bias=1.0, anchor=(0.65, 0.45))
+    t.connect(counter, counter, 1.0)
+
+    for node in [bias, *loops, counter]:
+        t.connect("TimeAlive", node, 0.0)
+    for readout in [d_f1, d_f3, d_r3, bias, *loops, counter]:
         t.connect(readout, "Herding", 0.0)
 
     t.save(out_path)
