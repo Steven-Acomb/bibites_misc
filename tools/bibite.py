@@ -22,6 +22,22 @@ from pathlib import Path
 INPUT, SIGMOID, LINEAR, TANH, SINE, RELU, GAUSSIAN, LATCH, DIFFERENTIAL, \
     ABS, MULT, INTEGRATOR, INHIBITORY, SOFTLATCH = range(14)
 
+# Every input and output node a v0.6 bibite can have, in the game's order.
+INPUTS = [
+    "EnergyRatio", "Maturity", "LifeRatio", "Fullness", "Speed", "RotationSpeed",
+    "IsGrabbing", "AttackedDamage", "EggStored", "BibiteCloseness", "BibiteAngle",
+    "NBibites", "PlantCloseness", "PlantAngle", "NPlants", "MeatCloseness",
+    "MeatAngle", "NMeats", "RedBibite", "GreenBibite", "BlueBibite", "Tic",
+    "Minute", "TimeAlive", "PheroSense1", "PheroSense2", "PheroSense3",
+    "Phero1Angle", "Phero2Angle", "Phero3Angle", "Phero1Heading",
+    "Phero2Heading", "Phero3Heading",
+]
+OUTPUTS = [
+    "Accelerate", "Rotate", "Herding", "EggProduction", "Want2Lay", "Want2Eat",
+    "Digestion", "Grab", "ClkReset", "PhereOut1", "PhereOut2", "PhereOut3",
+    "Want2Grow", "Want2Heal", "Want2Attack",
+]
+
 
 class Template:
     def __init__(self, data):
@@ -77,6 +93,35 @@ class Template:
         }
         self.synapses.append(syn)
         return syn
+
+    def add_missing_inputs(self):
+        """Insert any absent input nodes at their standard positions.
+
+        Rebuilds the node list as inputs, outputs, then hidden nodes, and
+        renumbers Index/Inov (remapping synapses and anchors) to match.
+        """
+        by_desc = {n["Desc"]: n for n in self.nodes}
+        missing_outputs = [d for d in OUTPUTS if d not in by_desc]
+        if missing_outputs:
+            raise ValueError(f"template lacks outputs {missing_outputs}")
+        inputs = [by_desc.get(d) or {"Type": INPUT, "Index": None, "Inov": None,
+                                     "Desc": d, "baseActivation": 0.0}
+                  for d in INPUTS]
+        hidden = [n for n in self.nodes if n["Desc"] not in INPUTS + OUTPUTS]
+        ordered = inputs + [by_desc[d] for d in OUTPUTS] + hidden
+
+        old_index = {n["Index"]: i for i, n in enumerate(ordered) if n["Index"] is not None}
+        old_anchors = self.data.get("nodeAnchors", {})
+        anchors = {}
+        for i, n in enumerate(ordered):
+            if str(n["Inov"]) in old_anchors:
+                anchors[str(i + 1)] = old_anchors[str(n["Inov"])]
+            n["Index"], n["Inov"] = i, i + 1
+        for s in self.synapses:
+            s["NodeIn"], s["NodeOut"] = old_index[s["NodeIn"]], old_index[s["NodeOut"]]
+        self.data["nodes"] = ordered
+        if anchors:
+            self.data["nodeAnchors"] = anchors
 
     def copy_anchors_from(self, other):
         """Give every node that shares a Desc with `other` the same layout spot."""
