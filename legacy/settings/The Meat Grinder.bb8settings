@@ -1,0 +1,371 @@
+{
+  "randomVirgin": {
+    "Value": true
+  },
+  "colorR": {
+    "Value": 0.10000000149011612
+  },
+  "colorG": {
+    "Value": 0.10000000149011612
+  },
+  "colorB": {
+    "Value": 0.10000000149011612
+  },
+  "mutationChance": {
+    "Value": 8.0
+  },
+  "mutationVariance": {
+    "Value": 0.02500000037252903
+  },
+  "brainMutationChance": {
+    "Value": 4.0
+  },
+  "brainMutationVariance": {
+    "Value": 0.05000000074505806
+  },
+  "backgroundMutationChance": {
+    "Value": 1.0
+  },
+  "backgroundMutationVariance": {
+    "Value": 0.012500000186264515
+  },
+  "synapseMutationChance": {
+    "Value": 0.85000002384185791
+  },
+  "neuronMutationChance": {
+    "Value": 0.15000000596046448
+  },
+  "synapseChangeChance": {
+    "Value": 0.74999183416366577
+  },
+  "synapseFlipChance": {
+    "Value": 0.025003248825669289
+  },
+  "synapseToggleChance": {
+    "Value": 0.025004783645272255
+  },
+  "synapseAddChance": {
+    "Value": 0.10000000149011612
+  },
+  "synapseRemoveChance": {
+    "Value": 0.10000013560056686
+  },
+  "neuronChangeChance": {
+    "Value": 0.2999691367149353
+  },
+  "neuronAddChance": {
+    "Value": 0.35003089904785156
+  },
+  "neuronRemoveChance": {
+    "Value": 0.34999999403953552
+  },
+  "diet": {
+    "Value": 0.20000000298023224
+  },
+  "sizeRatio": {
+    "Value": 1.0
+  },
+  "speedRatio": {
+    "Value": 0.75
+  },
+  "layTime": {
+    "Value": 15.0
+  },
+  "broodTime": {
+    "Value": 20.0
+  },
+  "hatchTime": {
+    "Value": 10.0
+  },
+  "strength": {
+    "Value": 10.0
+  },
+  "defence": {
+    "Value": 2.5
+  },
+  "viewAngle": {
+    "Value": 180.0
+  },
+  "viewRadius": {
+    "Value": 75.0
+  },
+  "clkSpeed": {
+    "Value": 1.0
+  },
+  "pherosense": {
+    "Value": 150.0
+  },
+  "baseImmuneActivation": {
+    "Value": 0.05000000074505806
+  },
+  "herdSeparationWeight": {
+    "Value": 1.0
+  },
+  "herdAlignmentWeight": {
+    "Value": 1.5
+  },
+  "herdCohesionWeight": {
+    "Value": 0.75
+  },
+  "herdVelocityWeight": {
+    "Value": 0.25
+  },
+  "herdSeparationDistance": {
+    "Value": 35.0
+  },
+  "growthFactor": {
+    "Value": 0.15000000596046448
+  },
+  "growthMaturityFactor": {
+    "Value": 2.0
+  },
+  "growthMaturityExponent": {
+    "Value": 1.0
+  },
+  "virusEnabled": {
+    "Value": false
+  },
+  "virusGenerationTime": {
+    "Value": 50.0
+  },
+  "virusHealthDamageRate": {
+    "Value": 5.0
+  },
+  "virusEnergyDamageRate": {
+    "Value": 5.0
+  },
+  "virusImmuneDamage": {
+    "Value": 0.05000000074505806
+  },
+  "cellInfectionProbabilityScale": {
+    "Value": 1.0
+  },
+  "cellInfectionProbabilityPower": {
+    "Value": 0.5
+  },
+  "skinInfectionProbabilityScale": {
+    "Value": 1.0
+  },
+  "skinInfectionProbabilityPower": {
+    "Value": 0.5
+  },
+  "airInfectionProbabilityScale": {
+    "Value": 1.0
+  },
+  "airInfectionProbabilityPower": {
+    "Value": 0.5
+  },
+  "defaultAirVirionProduction": {
+    "Value": 1.5
+  },
+  "airVirionLifetime": {
+    "Value": 3.0
+  },
+  "airVirionSpeed": {
+    "Value": 3.0
+  },
+  "immuneActivationHealthImpact": {
+    "Value": 25.0
+  },
+  "immuneActivationEnergyImpact": {
+    "Value": 10.0
+  },
+  "immuneAbsoluteFighting": {
+    "Value": 2.5
+  },
+  "immuneRelativeFighting": {
+    "Value": 25.0
+  },
+  "virusCountFightingImpact": {
+    "Value": 0.25
+  },
+  "pelletCollision": {
+    "Value": true
+  },
+  "pelletMerge": {
+    "Value": false
+  },
+  "pelletRotation": {
+    "Value": true
+  },
+  "eggCollision": {
+    "Value": true
+  },
+  "voidAvoidance": {
+    "Value": false
+  },
+  "voidAvoidanceDistance": {
+    "Value": 100.0
+  },
+  "SimulationSize": {
+    "Value": 500.0
+  },
+  "killZone": {
+    "Value": true
+  },
+  "killZoneRadiusFactor": {
+    "Value": 1.3500000238418579
+  },
+  "biomassDensity": {
+    "Value": 0.05000000074505806
+  },
+  "initialSeeding": {
+    "Value": 1.0
+  },
+  "pelletSpawnSlicingFactor": {
+    "Value": 0.970169723033905
+  },
+  "pelletSpawnSlicingPower": {
+    "Value": 0.75803720951080322
+  },
+  "pelletSpawnSizeFactor": {
+    "Value": 0.3732340931892395
+  },
+  "pelletSpawnConcentration": {
+    "Value": 2.0
+  },
+  "pelletConcentrationSpawnType": {
+    "Value": 0
+  },
+  "pelletSpawnDrift": {
+    "Value": -3.0
+  },
+  "plantGrowth": {
+    "Value": 9.9999997473787516E-06
+  },
+  "pelletEnergy": {
+    "Value": 25.0
+  },
+  "meatRot": {
+    "Value": true
+  },
+  "meatRotTime": {
+    "Value": 60.0
+  },
+  "meatRotRate": {
+    "Value": 0.019999999552965164
+  },
+  "bibiteGrowth": {
+    "Value": 1.0
+  },
+  "capBibiteGrowth": {
+    "Value": false
+  },
+  "limitBibiteBirth": {
+    "Value": false
+  },
+  "dragCoefficient": {
+    "Value": 5.0
+  },
+  "forwardForce": {
+    "Value": 300.0
+  },
+  "backwardFraction": {
+    "Value": 0.5
+  },
+  "bibiteMassDensity": {
+    "Value": 0.05000000074505806
+  },
+  "defenceMassFactor": {
+    "Value": 0.10000000149011612
+  },
+  "defenceDamageReductionFactor": {
+    "Value": 0.75
+  },
+  "defenceMovementPenalty": {
+    "Value": 0.019999999552965164
+  },
+  "stomachContentContribution": {
+    "Value": 1.0
+  },
+  "bitingPressure": {
+    "Value": 50.0
+  },
+  "throwingForce": {
+    "Value": 25.0
+  },
+  "bitingDamage": {
+    "Value": 20.0
+  },
+  "collisionDamageConstant": {
+    "Value": 0.10000000149011612
+  },
+  "collisionDamageThreshold": {
+    "Value": 50.0
+  },
+  "metabolismCost": {
+    "Value": 0.5
+  },
+  "moveCost": {
+    "Value": 0.5
+  },
+  "turnCost": {
+    "Value": 0.25
+  },
+  "neuronBirthCost": {
+    "Value": 0.0020000000949949026
+  },
+  "synapseBirthCost": {
+    "Value": 0.0020000000949949026
+  },
+  "neuronUpkeepCost": {
+    "Value": 1.9999999494757503E-05
+  },
+  "synapseUpkeepCost": {
+    "Value": 1.9999999494757503E-05
+  },
+  "pheromoneProductionCost": {
+    "Value": 0.00020000000949949026
+  },
+  "pheromoneProductionStrength": {
+    "Value": 100.0
+  },
+  "ageingThreshold": {
+    "Value": 2.0
+  },
+  "ageStrengthPenalties": {
+    "Value": 0.05000000074505806
+  },
+  "ageMetabolismPenalties": {
+    "Value": 0.20000000298023224
+  },
+  "maxEnergyToMaxHealthRatio": {
+    "Value": 1.5
+  },
+  "baseBodyEnergyRatio": {
+    "Value": 1.5
+  },
+  "healthBodyRatio": {
+    "Value": 4.0
+  },
+  "viewAngleBodyCost": {
+    "Value": 360.0
+  },
+  "viewRadiusBodyCost": {
+    "Value": 500.0
+  },
+  "strengthBodyCost": {
+    "Value": 100.0
+  },
+  "immuneBodyCost": {
+    "Value": 200.0
+  },
+  "materials": {
+    "PlantSettings": {
+      "hardness": 0.5,
+      "digestionRate": 0.75,
+      "energyDensity": 5.0,
+      "massDensity": 0.015,
+      "minEfficiency": 0.0,
+      "maxEfficiency": 0.5
+    },
+    "MeatSettings": {
+      "hardness": 1.5,
+      "digestionRate": 2.5,
+      "energyDensity": 10.0,
+      "massDensity": 0.025,
+      "minEfficiency": 0.25,
+      "maxEfficiency": 0.75
+    }
+  }
+}

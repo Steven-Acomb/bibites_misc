@@ -1,0 +1,1070 @@
+{
+  "name": "NeuronBox",
+  "speciesName": "NeuronBox",
+  "description": "Starter Bibite for brain evolution experiment.\nCreated from easy herbivore and modified to have a large number of tiny modifications to the brain.\n\nNode placement saved.",
+  "generation": 0,
+  "version": "0.6.2",
+  "nodes": [
+    {
+      "Type": 0,
+      "Index": 0,
+      "Inov": 1,
+      "Desc": "EnergyRatio",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 1,
+      "Inov": 2,
+      "Desc": "Maturity",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 2,
+      "Inov": 3,
+      "Desc": "LifeRatio",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 3,
+      "Inov": 4,
+      "Desc": "Fullness",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 4,
+      "Inov": 5,
+      "Desc": "Speed",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 5,
+      "Inov": 6,
+      "Desc": "RotationSpeed",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 6,
+      "Inov": 7,
+      "Desc": "IsGrabbing",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 7,
+      "Inov": 8,
+      "Desc": "AttackedDamage",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 8,
+      "Inov": 9,
+      "Desc": "EggStored",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 9,
+      "Inov": 10,
+      "Desc": "BibiteCloseness",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 10,
+      "Inov": 11,
+      "Desc": "BibiteAngle",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 11,
+      "Inov": 12,
+      "Desc": "NBibites",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 12,
+      "Inov": 13,
+      "Desc": "PlantCloseness",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 13,
+      "Inov": 14,
+      "Desc": "PlantAngle",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 14,
+      "Inov": 15,
+      "Desc": "NPlants",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 15,
+      "Inov": 16,
+      "Desc": "MeatCloseness",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 16,
+      "Inov": 17,
+      "Desc": "MeatAngle",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 17,
+      "Inov": 18,
+      "Desc": "NMeats",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 18,
+      "Inov": 19,
+      "Desc": "RedBibite",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 19,
+      "Inov": 20,
+      "Desc": "GreenBibite",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 20,
+      "Inov": 21,
+      "Desc": "BlueBibite",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 21,
+      "Inov": 22,
+      "Desc": "Tic",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 22,
+      "Inov": 23,
+      "Desc": "Minute",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 23,
+      "Inov": 24,
+      "Desc": "TimeAlive",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 24,
+      "Inov": 25,
+      "Desc": "PheroSense1",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 25,
+      "Inov": 26,
+      "Desc": "PheroSense2",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 26,
+      "Inov": 27,
+      "Desc": "PheroSense3",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 27,
+      "Inov": 28,
+      "Desc": "Phero1Angle",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 28,
+      "Inov": 29,
+      "Desc": "Phero2Angle",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 29,
+      "Inov": 30,
+      "Desc": "Phero3Angle",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 30,
+      "Inov": 31,
+      "Desc": "Phero1Heading",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 31,
+      "Inov": 32,
+      "Desc": "Phero2Heading",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 0,
+      "Index": 32,
+      "Inov": 33,
+      "Desc": "Phero3Heading",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 3,
+      "Index": 33,
+      "Inov": 34,
+      "Desc": "Accelerate",
+      "baseActivation": 1.12708282
+    },
+    {
+      "Type": 3,
+      "Index": 34,
+      "Inov": 35,
+      "Desc": "Rotate",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 3,
+      "Index": 35,
+      "Inov": 36,
+      "Desc": "Herding",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 3,
+      "Index": 36,
+      "Inov": 37,
+      "Desc": "EggProduction",
+      "baseActivation": 0.2
+    },
+    {
+      "Type": 1,
+      "Index": 37,
+      "Inov": 38,
+      "Desc": "Want2Lay",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 3,
+      "Index": 38,
+      "Inov": 39,
+      "Desc": "Want2Eat",
+      "baseActivation": 1.228
+    },
+    {
+      "Type": 1,
+      "Index": 39,
+      "Inov": 40,
+      "Desc": "Digestion",
+      "baseActivation": -0.528243363
+    },
+    {
+      "Type": 3,
+      "Index": 40,
+      "Inov": 41,
+      "Desc": "Grab",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 1,
+      "Index": 41,
+      "Inov": 42,
+      "Desc": "ClkReset",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 5,
+      "Index": 42,
+      "Inov": 43,
+      "Desc": "PhereOut1",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 5,
+      "Index": 43,
+      "Inov": 44,
+      "Desc": "PhereOut2",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 5,
+      "Index": 44,
+      "Inov": 45,
+      "Desc": "PhereOut3",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 1,
+      "Index": 45,
+      "Inov": 46,
+      "Desc": "Want2Grow",
+      "baseActivation": 1.78658354
+    },
+    {
+      "Type": 1,
+      "Index": 46,
+      "Inov": 47,
+      "Desc": "Want2Heal",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 1,
+      "Index": 47,
+      "Inov": 48,
+      "Desc": "Want2Attack",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 4,
+      "Index": 48,
+      "Inov": 49,
+      "Desc": "L2N1",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 4,
+      "Index": 49,
+      "Inov": 50,
+      "Desc": "L1N1",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 6,
+      "Index": 50,
+      "Inov": 51,
+      "Desc": "Hidden1",
+      "baseActivation": 0.0
+    },
+    {
+      "Type": 4,
+      "Index": 51,
+      "Inov": 52,
+      "Desc": "Hidden0",
+      "baseActivation": 0.0
+    }
+  ],
+  "synapses": [
+    {
+      "Inov": 1,
+      "NodeIn": 6,
+      "NodeOut": 33,
+      "Weight": 1.12708282,
+      "En": false
+    },
+    {
+      "Inov": 2,
+      "NodeIn": 10,
+      "NodeOut": 34,
+      "Weight": -0.127082855,
+      "En": true
+    },
+    {
+      "Inov": 3,
+      "NodeIn": 12,
+      "NodeOut": 33,
+      "Weight": -1.1010828,
+      "En": true
+    },
+    {
+      "Inov": 4,
+      "NodeIn": 9,
+      "NodeOut": 33,
+      "Weight": 0.127082855,
+      "En": true
+    },
+    {
+      "Inov": 5,
+      "NodeIn": 13,
+      "NodeOut": 34,
+      "Weight": 0.7865835,
+      "En": true
+    },
+    {
+      "Inov": 6,
+      "NodeIn": 22,
+      "NodeOut": 51,
+      "Weight": 5.78658342,
+      "En": true
+    },
+    {
+      "Inov": 7,
+      "NodeIn": 14,
+      "NodeOut": 41,
+      "Weight": 3.38358355,
+      "En": true
+    },
+    {
+      "Inov": 8,
+      "NodeIn": 22,
+      "NodeOut": 34,
+      "Weight": 0.04685151,
+      "En": false
+    },
+    {
+      "Inov": 9,
+      "NodeIn": 51,
+      "NodeOut": 34,
+      "Weight": 0.486583471,
+      "En": false
+    },
+    {
+      "Inov": 10,
+      "NodeIn": 9,
+      "NodeOut": 45,
+      "Weight": 1.78658354,
+      "En": false
+    },
+    {
+      "Inov": 11,
+      "NodeIn": 0,
+      "NodeOut": 50,
+      "Weight": 2.18658352,
+      "En": true
+    },
+    {
+      "Inov": 12,
+      "NodeIn": 50,
+      "NodeOut": 45,
+      "Weight": -4.78658342,
+      "En": true
+    },
+    {
+      "Inov": 13,
+      "NodeIn": 3,
+      "NodeOut": 39,
+      "Weight": 1.22824335,
+      "En": true
+    },
+    {
+      "Inov": 14,
+      "NodeIn": 0,
+      "NodeOut": 39,
+      "Weight": -0.528243363,
+      "En": false
+    },
+    {
+      "Inov": 15,
+      "NodeIn": 19,
+      "NodeOut": 38,
+      "Weight": -0.842978239,
+      "En": true
+    },
+    {
+      "Inov": 16,
+      "NodeIn": 21,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 17,
+      "NodeIn": 20,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 18,
+      "NodeIn": 18,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 19,
+      "NodeIn": 17,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 20,
+      "NodeIn": 16,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 21,
+      "NodeIn": 15,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 22,
+      "NodeIn": 11,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 23,
+      "NodeIn": 23,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 24,
+      "NodeIn": 12,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 25,
+      "NodeIn": 6,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 26,
+      "NodeIn": 3,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 27,
+      "NodeIn": 9,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 28,
+      "NodeIn": 0,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 29,
+      "NodeIn": 10,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 30,
+      "NodeIn": 22,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 31,
+      "NodeIn": 13,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 32,
+      "NodeIn": 14,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 33,
+      "NodeIn": 19,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 34,
+      "NodeIn": 32,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 35,
+      "NodeIn": 24,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 36,
+      "NodeIn": 25,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 37,
+      "NodeIn": 26,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 38,
+      "NodeIn": 27,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 39,
+      "NodeIn": 28,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 40,
+      "NodeIn": 29,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 41,
+      "NodeIn": 1,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 42,
+      "NodeIn": 2,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 43,
+      "NodeIn": 4,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 44,
+      "NodeIn": 5,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 45,
+      "NodeIn": 7,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 46,
+      "NodeIn": 8,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 47,
+      "NodeIn": 30,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 48,
+      "NodeIn": 31,
+      "NodeOut": 49,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 49,
+      "NodeIn": 49,
+      "NodeOut": 48,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 50,
+      "NodeIn": 48,
+      "NodeOut": 33,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 51,
+      "NodeIn": 48,
+      "NodeOut": 45,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 52,
+      "NodeIn": 48,
+      "NodeOut": 39,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 53,
+      "NodeIn": 48,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 54,
+      "NodeIn": 48,
+      "NodeOut": 41,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 55,
+      "NodeIn": 48,
+      "NodeOut": 38,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 56,
+      "NodeIn": 48,
+      "NodeOut": 47,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 57,
+      "NodeIn": 48,
+      "NodeOut": 36,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 58,
+      "NodeIn": 48,
+      "NodeOut": 46,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 59,
+      "NodeIn": 48,
+      "NodeOut": 37,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 60,
+      "NodeIn": 48,
+      "NodeOut": 35,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 61,
+      "NodeIn": 48,
+      "NodeOut": 40,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 62,
+      "NodeIn": 48,
+      "NodeOut": 42,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 63,
+      "NodeIn": 48,
+      "NodeOut": 43,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 64,
+      "NodeIn": 48,
+      "NodeOut": 44,
+      "Weight": 0.0,
+      "En": true
+    }
+  ],
+  "genes": {
+    "LayTime": 4.96891737,
+    "BroodTime": 10.0,
+    "HatchTime": 5.0,
+    "SizeRatio": 0.8511612,
+    "SpeedRatio": 0.6040746,
+    "ColorR": 0.5,
+    "ColorG": 0.5,
+    "ColorB": 0.5,
+    "MutationAmountSigma": 0.01,
+    "AverageMutationNumber": 1.0,
+    "BrainMutationSigma": 0.0005,
+    "BrainAverageMutation": 10.0,
+    "ViewAngle": 126.9547,
+    "ViewRadius": 74.91903,
+    "ClockSpeed": 1.03065383,
+    "PheroSense": 145.662125,
+    "Diet": 0.114624247,
+    "HerdSeparationWeight": 0.9185933,
+    "HerdAlignmentWeight": 1.5,
+    "HerdCohesionWeight": 0.8202511,
+    "HerdVelocityWeight": 0.25,
+    "HerdSeparationDistance": 35.0,
+    "GrowthScale": 0.2671181,
+    "GrowthMaturityFactor": 0.99026674,
+    "GrowthMaturityExponent": 1.0,
+    "EyeOffset": 0.5,
+    "StomachWAG": 5.0,
+    "WombWAG": 2.5,
+    "FatWAG": 2.5,
+    "ArmorWAG": 0.252244353,
+    "ThroatWAG": 1.2359972,
+    "MouthMusclesWAG": 0.253732026,
+    "MoveMusclesWAG": 0.6179986,
+    "FatStorageThreshold": 0.5,
+    "FatStorageDeadband": 0.25
+  },
+  "nodeAnchors": {
+    "1": {
+      "x": 0.0,
+      "y": 9.110846
+    },
+    "7": {
+      "x": 0.0,
+      "y": 7.38331556
+    },
+    "10": {
+      "x": 0.0,
+      "y": 8.4150095
+    },
+    "13": {
+      "x": 0.0,
+      "y": 6.83262253
+    },
+    "32": {
+      "x": 0.0,
+      "y": 21.4662266
+    },
+    "31": {
+      "x": 0.0,
+      "y": 20.7640533
+    },
+    "9": {
+      "x": 0.0,
+      "y": 20.1192017
+    },
+    "8": {
+      "x": 0.0,
+      "y": 19.43918
+    },
+    "6": {
+      "x": 0.0,
+      "y": 18.7826023
+    },
+    "5": {
+      "x": 0.0,
+      "y": 18.102581
+    },
+    "3": {
+      "x": 0.0,
+      "y": 17.46945
+    },
+    "2": {
+      "x": 0.0,
+      "y": 16.8011513
+    },
+    "30": {
+      "x": 0.0,
+      "y": 16.152977
+    },
+    "29": {
+      "x": 0.0,
+      "y": 15.5080585
+    },
+    "28": {
+      "x": 0.0,
+      "y": 14.8801107
+    },
+    "27": {
+      "x": 0.0,
+      "y": 14.1503305
+    },
+    "26": {
+      "x": 0.0,
+      "y": 13.4884386
+    },
+    "25": {
+      "x": 0.0,
+      "y": 12.7926025
+    },
+    "33": {
+      "x": 0.0,
+      "y": 12.0724726
+    },
+    "20": {
+      "x": 0.0,
+      "y": 11.5059118
+    },
+    "15": {
+      "x": 0.0,
+      "y": 11.0355988
+    },
+    "14": {
+      "x": 0.0,
+      "y": 10.5417652
+    },
+    "23": {
+      "x": 0.0,
+      "y": 10.1184807
+    },
+    "11": {
+      "x": 0.0,
+      "y": 9.594535
+    },
+    "4": {
+      "x": 0.0,
+      "y": 7.84547043
+    },
+    "24": {
+      "x": 0.0,
+      "y": 6.179216
+    },
+    "12": {
+      "x": 0.0,
+      "y": 5.500352
+    },
+    "16": {
+      "x": 0.0,
+      "y": 4.80573368
+    },
+    "17": {
+      "x": 0.0,
+      "y": 4.11194563
+    },
+    "18": {
+      "x": 0.0,
+      "y": 3.39112782
+    },
+    "19": {
+      "x": 0.0,
+      "y": 2.72437048
+    },
+    "21": {
+      "x": 0.0,
+      "y": 2.02965784
+    },
+    "22": {
+      "x": 0.0,
+      "y": 1.359279
+    },
+    "34": {
+      "x": 1.0,
+      "y": 0.5257139
+    },
+    "35": {
+      "x": 1.0,
+      "y": 1.190273
+    },
+    "42": {
+      "x": 1.0,
+      "y": 1.40293193
+    },
+    "46": {
+      "x": 1.0,
+      "y": 0.764955342
+    },
+    "40": {
+      "x": 1.0,
+      "y": 0.990905464
+    },
+    "45": {
+      "x": 1.0,
+      "y": 3.92600942
+    },
+    "44": {
+      "x": 1.0,
+      "y": 3.68902469
+    },
+    "43": {
+      "x": 1.0,
+      "y": 3.418184
+    },
+    "41": {
+      "x": 1.0,
+      "y": 3.130417
+    },
+    "36": {
+      "x": 1.0,
+      "y": 2.8567555
+    },
+    "38": {
+      "x": 1.0,
+      "y": 2.54597378
+    },
+    "47": {
+      "x": 1.0,
+      "y": 2.30673242
+    },
+    "37": {
+      "x": 1.0,
+      "y": 2.09407353
+    },
+    "48": {
+      "x": 1.0,
+      "y": 1.86812341
+    },
+    "39": {
+      "x": 1.0,
+      "y": 1.64217329
+    },
+    "49": {
+      "x": 0.6843876,
+      "y": 0.323575675
+    },
+    "50": {
+      "x": 0.512533,
+      "y": 0.326359332
+    },
+    "51": {
+      "x": 0.4651769,
+      "y": 0.0
+    },
+    "52": {
+      "x": 0.474612743,
+      "y": 0.0237389542
+    }
+  }
+}

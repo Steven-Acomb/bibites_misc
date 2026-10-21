@@ -1,0 +1,5 @@
+The eye color is the color on the opposite of the (RGB) color spectrum from the Bibites body color. 
+For example, a blue Bibite will have yellow eyes (red + green => yellow). 
+If the Bibites color is close to a grayscale color, this does become a bit more complicated: the game will take the most dominant color component(s) and take the opposite of that.
+For example, a Bibite with color r: 0.1, g: 0.11, b: 0.1 will be assumed to be green, and the eyes will have the corresponding color purple. 
+If they are exactly identical, the Bibite is assumed to be red and has cyan eyes.

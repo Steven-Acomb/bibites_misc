@@ -1,0 +1,216 @@
+{
+    "name": "4BM",
+    "creationIndex": 6,
+    "colour": {
+        "r": 0.06854389607906342,
+        "g": 0.22502501308918,
+        "b": 0.06377775967121124,
+        "a": 1.0
+    },
+    "nameColour": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0,
+        "a": 1.0
+    },
+    "componentNameList": [
+        "SIGNAL IN",
+        "SIGNAL OUT",
+        "D-LT"
+    ],
+    "savedComponentChips": [
+        {
+            "chipName": "SIGNAL IN",
+            "posX": -7.6431,
+            "posY": 3.0722,
+            "inputPins": [],
+            "outputPinNames": [
+                "A3"
+            ]
+        },
+        {
+            "chipName": "SIGNAL IN",
+            "posX": -7.6431,
+            "posY": 1.7666,
+            "inputPins": [],
+            "outputPinNames": [
+                "A2"
+            ]
+        },
+        {
+            "chipName": "SIGNAL IN",
+            "posX": -7.6431,
+            "posY": 0.5829,
+            "inputPins": [],
+            "outputPinNames": [
+                "A1"
+            ]
+        },
+        {
+            "chipName": "SIGNAL IN",
+            "posX": -7.6431,
+            "posY": -0.6877,
+            "inputPins": [],
+            "outputPinNames": [
+                "A0"
+            ]
+        },
+        {
+            "chipName": "SIGNAL IN",
+            "posX": -7.6431,
+            "posY": -3.0464,
+            "inputPins": [],
+            "outputPinNames": [
+                "Enable"
+            ]
+        },
+        {
+            "chipName": "SIGNAL OUT",
+            "posX": 7.6431,
+            "posY": 3.1766,
+            "inputPins": [
+                {
+                    "name": "Q3",
+                    "parentChipIndex": 12,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": []
+        },
+        {
+            "chipName": "SIGNAL OUT",
+            "posX": 7.6431,
+            "posY": 1.9059,
+            "inputPins": [
+                {
+                    "name": "Q2",
+                    "parentChipIndex": 11,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": []
+        },
+        {
+            "chipName": "SIGNAL OUT",
+            "posX": 7.6431,
+            "posY": 0.7483,
+            "inputPins": [
+                {
+                    "name": "Q1",
+                    "parentChipIndex": 10,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": []
+        },
+        {
+            "chipName": "SIGNAL OUT",
+            "posX": 7.6431,
+            "posY": -0.6703,
+            "inputPins": [
+                {
+                    "name": "Q0",
+                    "parentChipIndex": 9,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": []
+        },
+        {
+            "chipName": "D-LT",
+            "posX": 0.0087,
+            "posY": -0.7748,
+            "inputPins": [
+                {
+                    "name": "D",
+                    "parentChipIndex": 3,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                },
+                {
+                    "name": "Enable",
+                    "parentChipIndex": 4,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": [
+                "Q",
+                "Qp"
+            ]
+        },
+        {
+            "chipName": "D-LT",
+            "posX": -0.0522,
+            "posY": 0.6264,
+            "inputPins": [
+                {
+                    "name": "D",
+                    "parentChipIndex": 2,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                },
+                {
+                    "name": "Enable",
+                    "parentChipIndex": 4,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": [
+                "Q",
+                "Qp"
+            ]
+        },
+        {
+            "chipName": "D-LT",
+            "posX": -0.087,
+            "posY": 1.7753,
+            "inputPins": [
+                {
+                    "name": "D",
+                    "parentChipIndex": 1,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                },
+                {
+                    "name": "Enable",
+                    "parentChipIndex": 4,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": [
+                "Q",
+                "Qp"
+            ]
+        },
+        {
+            "chipName": "D-LT",
+            "posX": -0.0783,
+            "posY": 3.0112,
+            "inputPins": [
+                {
+                    "name": "D",
+                    "parentChipIndex": 0,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                },
+                {
+                    "name": "Enable",
+                    "parentChipIndex": 4,
+                    "parentChipOutputIndex": 0,
+                    "isCylic": false
+                }
+            ],
+            "outputPinNames": [
+                "Q",
+                "Qp"
+            ]
+        }
+    ]
+}

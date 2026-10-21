@@ -149,7 +149,11 @@ bibites to 0.4.2. `Input` and `Output` are empty.
 
 ---
 
-## 5. Suggested next steps
+## 5. Copied into this repo
+
+The small, irreplaceable files are now in [`legacy/`](legacy/README.md).
+
+## 6. Suggested next steps
 
 1. **Copy the A-drive-only files to C** before anything else:
    `Neuron_Box_Test_1_09_07_25.zip` and the 23 autosaves. Otherwise the last two
@@ -157,6 +161,5 @@ bibites to 0.4.2. `Input` and `Output` are empty.
 2. The Steam build on C was updated today. Your saves are v0.6.2.1. Back up the
    save folder before loading anything in the new version, in case it migrates
    the files.
-3. Consider copying the small, irreplaceable stuff into this repo, e.g. a
-   `bibites/` folder with the NeuronBox templates, your named `.bb8` files and the
-   scripts. Leave out the big save zips and the 20k dump.
+3. Still not copied into `legacy/` (on hold): the 2023 free-for-all tournament
+   bibites, and NeuronBox champions extracted from the final save.
