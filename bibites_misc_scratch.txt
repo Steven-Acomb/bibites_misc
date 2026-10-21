@@ -1,0 +1,13 @@
+
+---
+---
+10/21/2026:
+
+It's been a while. Saving the paths to where I have bibites saves and data and whatnot a the bottom of this. Gonna paste the obvious trailheads then have Claude go poke around this box for anything else.
+---
+File Paths:
+
+Old PC misc folder: "A:\Users\acomb\Desktop\Media\Games\The Bibites"
+Actual game install: "C:\Program Files (x86)\Steam\steamapps\common\The Bibites"
+Save files: "C:\Users\Stephen\AppData\LocalLow\The Bibites\The Bibites\Savefiles"
+---
