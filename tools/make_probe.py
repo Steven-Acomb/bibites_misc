@@ -1,7 +1,9 @@
 """Build BrainProbe: Easy Herbivore plus side circuits that reveal how the game
-evaluates a brain. None of the probe nodes connect to outputs, so the bibite
-behaves exactly like Easy Herbivore; read the probe node values in the brain
-viewer.
+evaluates a brain. Read the probe node values in the brain viewer.
+
+The game drops hidden nodes that have no path to an output, so every probe
+readout gets a weight-0 synapse into Herding. That keeps the nodes alive
+without changing behavior: the bibite still acts exactly like Easy Herbivore.
 
 Usage: python tools/make_probe.py <Easy Herbivore.bb8template> <layout.bb8template> <out.bb8template>
 
@@ -46,12 +48,17 @@ def build(base_path, layout_path, out_path):
 
     # Bias: is baseActivation added before the activation function?
     # Reads sin(0.5) = 0.48 if so, 0.50 if added after.
-    t.add_node("Bias_sin0.5", SINE, bias=0.5, anchor=(0.25, 0.45))
+    bias = t.add_node("Bias_sin0.5", SINE, bias=0.5, anchor=(0.25, 0.45))
 
     # Sine self-loops: x -> sin(w*x + 0.1). The 0.1 bias kicks it off zero.
+    loops = []
     for i, w in enumerate([0.5, 2.0, 3.0]):
         s = t.add_node(f"Loop_w{w}", SINE, bias=0.1, anchor=(0.35 + 0.1 * i, 0.45))
         t.connect(s, s, w)
+        loops.append(s)
+
+    for readout in [d_f1, d_f3, d_r3, bias, *loops]:
+        t.connect(readout, "Herding", 0.0)
 
     t.save(out_path)
 

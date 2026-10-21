@@ -650,6 +650,55 @@
       "NodeOut": 61,
       "Weight": 3.0,
       "En": true
+    },
+    {
+      "Inov": 228,
+      "NodeIn": 55,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 229,
+      "NodeIn": 56,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 230,
+      "NodeIn": 57,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 231,
+      "NodeIn": 58,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 232,
+      "NodeIn": 59,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 233,
+      "NodeIn": 60,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
+    },
+    {
+      "Inov": 234,
+      "NodeIn": 61,
+      "NodeOut": 34,
+      "Weight": 0.0,
+      "En": true
     }
   ],
   "genes": {
