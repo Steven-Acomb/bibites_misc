@@ -1,2 +1,5 @@
 # Keep game files byte-for-byte (no line-ending conversion)
 legacy/** -text
+*.bb8 -text
+*.bb8template -text
+*.bb8settings -text
