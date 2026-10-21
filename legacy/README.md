@@ -16,6 +16,7 @@ and NeuronBox champions).
 | `settings/` | 7 old `SimulationSettings.bb8settings` presets, renamed after the folder they came from | `My Saves\Simulation Settings\` |
 | `scripts/` | `generate_bibite_brain.py` (2025), `bibite_fixer.py` (2022) | A Desktop; `Media\Projects\Programming\Python\BibiteFixer\` |
 | `notes/` | The ChatGPT conversation behind the brain script, `bibite eye color.txt`, and the Digital Logic Sim "Bibite Brains" chips | ChatGPT export; `Literature and Background\`; DLS `SaveData\` |
+| `notes/goodnotes_2023/` | 4 handwritten iPad notebooks (Aug 2023): lineages, the QI1 tournament, reverse-engineering Iratus Populator. Transcribed in its README | GoodNotes export, 2026-10-21 |
 
 Note: `bibites/named/` and `my_saves_2022-2023/` both contain Aenus/Rosa
 Tyrannus, Iratus *, Stinkbags, etc. These aren't duplicates. Sizes differ, and the
