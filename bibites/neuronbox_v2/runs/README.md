@@ -30,3 +30,13 @@ Population at the 10-22 save: 956 bibites in 38 species. Generations run 8–23
     (including this one) have it at 0, but brains still differ between them
     (all 536 members of species 11322 have distinct brains), so it isn't frozen.
   - BrainAverageMutation sits at 7–10.
+
+**2026-10-22 ~06:40, settings change, run resumed:**
+- Background Mutation Variance went from 5% to 10%.
+- Mutation Value Relativity went from 50% to 25%.
+
+Per the in-game tooltip, a lower relativity makes mutation size depend less
+on a gene's current value, so genes stuck near 0 can climb back out. That
+matters here: BrainMutationSigma had hit 0 in 274 bibites.
+
+At x100 the game showed 20 tps and sim/real x0.51.
