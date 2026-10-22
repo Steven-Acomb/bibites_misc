@@ -1,7 +1,7 @@
 {
   "name": "NeuronBox_v2",
   "speciesName": "NeuronBox_v2",
-  "description": "Brain evolution starter. Easy Herbivore plus 3 hidden sine layers of 12: inputs->L1, layer->layer, L3->outputs, self-loops, L3->L1 and outputs->L1, all at weight 0 (behaves exactly like Easy Herbivore until weights drift). Built by tools/make_neuronbox.py.",
+  "description": "Brain evolution starter. Easy Herbivore plus 3 hidden sine layers of 12: inputs->L1, layer->layer, L3->outputs, self-loops, L3->L1 and outputs->L1, all at weight 0 (behaves exactly like its base until weights drift). Built by tools/make_neuronbox.py.",
   "generation": 0,
   "version": "0.6.2",
   "nodes": [
