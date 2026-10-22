@@ -1,5 +1,18 @@
 # NeuronBox v2 runs
 
+## Shelved: carnivore (2026-10-22)
+
+`NeuronBox_v2_Carnivore.bb8template` (built with `make_neuronbox.py --carnivore`)
+was checked in-game: brain intact and it eats meat.
+
+Steve's plan for later:
+- Build a world like the herbivore one, but spawning meat instead of plants.
+- Gradually lower the meat spawn rate.
+- Gradually raise the rate of random bibite spawns.
+- Goal: evolve an actual predator.
+
+Meanwhile the herbivore run (test 2) continues.
+
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
 World: the 2025 run settings saved as a scenario. That means zero brain costs,
