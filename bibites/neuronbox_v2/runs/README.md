@@ -1,5 +1,13 @@
 # NeuronBox v2 runs
 
+**Terms used below:**
+- **"The box":** everything NeuronBox v2 adds to Easy Herbivore. That is the
+  36 sine neurons L1N1–L3N12 (3 layers of 12) and their 1,224 synapses, all
+  starting at weight 0. It excludes Easy Herbivore's own 15 synapses and its
+  Hidden0/Hidden1.
+- **"Box push":** the input an output neuron currently receives from L3,
+  i.e. Σ weight × L3 neuron value.
+
 ## Shelved: carnivore (2026-10-22)
 
 `NeuronBox_v2_Carnivore.bb8template` (built with `make_neuronbox.py --carnivore`)
