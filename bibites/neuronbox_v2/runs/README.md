@@ -100,3 +100,23 @@ Steve: almost no game time passed in it, so nothing real was lost.
   - `run_stats.py` now reports this split.
 - **Diet:** trending to pure herbivore. Median 0.011, and 240 bibites are at
   exactly 0.
+
+**Diversity at 10-25:**
+- **Species:** 56 living, but most hold only a handful of bibites; it's
+  equivalent to ~19 equally common species (inverse Simpson). All descend from
+  the founder 11320, and splits that still have descendants are mostly from
+  the last ~10 sim-hours.
+- **Brains:**
+  - Bibites in different species are about twice as far apart in weights as
+    bibites in the same species (median distance 2.0 vs 1.1).
+  - About 28% of the drift from the template is shared by the whole
+    population; the rest happened after lines split.
+  - Of the 1,260 added parameters, 864 vary noticeably between bibites (SD
+    above 0.02). Only 2 have one value shared across the population.
+- **Turnover is heavy:**
+  - Of the 38 species alive on the 10-22 morning, only 3 have living
+    descendants. One of them (11322) accounts for 74% of today's population.
+  - Of the 55 alive on the 10-22 afternoon, 16 have living descendants, and
+    one (11580) accounts for 64%.
+  - This window included the boom-and-settle population drop, which kills
+    lines on its own.
