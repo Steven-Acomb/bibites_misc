@@ -11,6 +11,7 @@ Usage: python tools/run_stats.py <world save .zip> [more saves...]
 
 import collections
 import json
+import math
 import statistics as st
 import sys
 import zipfile
@@ -33,7 +34,46 @@ def bibite_stats(b):
         if is_added(a["Desc"]) and not is_added(c["Desc"]) and s["En"]:
             drive[c["Desc"]] += s["Weight"] * a["Value"]
     top = max(drive.items(), key=lambda kv: abs(kv[1]), default=("-", 0.0))
-    return nonzero, max_w, top
+    return nonzero, max_w, top, input_driven(b)
+
+
+def input_driven(b):
+    """Largest part of any output's push from L3 that depends on the inputs.
+
+    Recomputes one brain tick of L1..L3 twice, with the saved input values and
+    with inputs zeroed, and returns the biggest difference at an output.
+    Feed-forward edges use this tick's values, recurrent ones last tick's
+    (the saved Values), matching docs/brain_mechanics.md.
+    """
+    nodes = {n["Index"]: n for n in b["brain"]["Nodes"]}
+    saved = {n["Desc"]: n["Value"] for n in nodes.values()}
+    kind = {n["Desc"]: n["archetype"] for n in nodes.values()}
+    incoming = collections.defaultdict(list)
+    for s in b["brain"]["Synapses"]:
+        if s["En"] and s["Weight"]:
+            incoming[nodes[s["NodeOut"]]["Desc"]].append(
+                (nodes[s["NodeIn"]]["Desc"], s["Weight"]))
+    added = [n for n in nodes.values() if is_added(n["Desc"])]
+    added.sort(key=lambda n: (n["Desc"][1], int(n["Desc"][3:])))
+
+    def push(zero_inputs):
+        val = dict(saved)
+        for n in added:
+            layer = int(n["Desc"][1])
+            x = n["baseActivation"]
+            for src, w in incoming[n["Desc"]]:
+                if kind[src] == 0:
+                    x += w * (0.0 if zero_inputs else saved[src])
+                elif is_added(src) and int(src[1]) == layer - 1:
+                    x += w * val[src]
+                else:
+                    x += w * saved[src]
+            val[n["Desc"]] = math.sin(x)
+        return {o: sum(w * val[s] for s, w in src_list if is_added(s))
+                for o, src_list in incoming.items() if kind[o] == 1}
+
+    real, zero = push(False), push(True)
+    return max((abs(real[o] - zero[o]) for o in real), default=0.0)
 
 
 def spread(xs, fmt="{:.4g}"):
@@ -61,6 +101,8 @@ def summarize(path):
     print(f"nonzero added synapses  {spread((s[0] for s in stats), '{}')}  (of 1224)")
     print(f"largest added |weight|  {spread(s[1] for s in stats)}")
     print(f"largest push on output  {spread(abs(s[2][1]) for s in stats)}")
+    print(f"  ...input-dependent    {spread(s[3] for s in stats)}  "
+          f">0.01: {sum(s[3] > 0.01 for s in stats)}  >0.05: {sum(s[3] > 0.05 for s in stats)}")
     best = max(range(len(stats)), key=lambda i: abs(stats[i][2][1]))
     out, val = stats[best][2]
     print(f"strongest: bibite gen {bibites[best]['genes']['gen']} species "

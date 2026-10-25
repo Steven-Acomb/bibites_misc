@@ -84,3 +84,19 @@ Numbers from `python tools/run_stats.py <save.zip>`:
     is at most 0.006 (median 0.0005) across all 570.
   - So the box currently acts as extra output bias. The input→L1→L2→L3→output
     paths are still too weak to matter.
+
+The 10-24 save file itself is gone, and the autosaves only keep the last 26.
+Steve: almost no game time passed in it, so nothing real was lost.
+
+### 10-25 save (~28.5 h game time; autosave every 10 min had stalled the overnight run, now disabled)
+
+- **Population:** 533 bibites in 56 species, generations 20–38. That's only
+  about one generation past 10-24.
+- **Added layers:** median 449 non-zero synapses; the largest |weight| per
+  bibite has a median of 0.30 and a max of 0.56. Basically unchanged from 10-24.
+- **Push on outputs:** median 0.031, max 0.24 (−0.24 into Herding,
+  species 11726).
+  - The input-dependent part is at most 0.007 (median 0.0005).
+  - `run_stats.py` now reports this split.
+- **Diet:** trending to pure herbivore. Median 0.011, and 240 bibites are at
+  exactly 0.
