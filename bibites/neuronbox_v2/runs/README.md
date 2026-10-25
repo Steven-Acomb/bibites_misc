@@ -21,6 +21,30 @@ Steve's plan for later:
 
 Meanwhile the herbivore run (test 2) continues.
 
+## Test 2, hex phase (from 2026-10-25)
+
+**The switch (sim time 28.8 h):**
+- Food zones were hot-swapped to the 7-zone hexagon. Each zone is radius
+  1/3 and only one of fertility, biomass or pellet size differs from the
+  others, along one of the three lines through the Center.
+- Totals were matched to the old world: 1.339 ME, 2.13 kE/s, ~6.7k pellets.
+  All other settings are unchanged.
+- Swapping deleted the old zones' pellets. Steve refilled by temporarily
+  raising spawn rates and hand-spawning food, then cutting it back. That
+  boomed the population from 546 to 731.
+- `p4` (29.0 h) is the clean start of this phase.
+
+`python tools/run_stats.py <save>` prints a per-zone table for this world.
+Note: the world size setting (20 ku) is a radius.
+
+| Save | Sim h | Bibites | Gen max | Species tied to zones | Brains vs own zone | Max input-dependent push |
+|---|---|---|---|---|---|---|
+| p4 | 29.0 | 731 | 38 | 1.28× | 0.965 | 0.007 |
+| p5 | 30.8 | 573 | 40 | 1.73× | 0.930 | 0.011 |
+
+At p5, residents per zone are West_North 149, West_Middle 98, East_North 72,
+Center 71, East_Middle 58, East_South 44, West_South 33, and 48 in the gaps.
+
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
 World: the 2025 run settings saved as a scenario. That means zero brain costs,
