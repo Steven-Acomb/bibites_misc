@@ -6,6 +6,11 @@ their all-zero start.
 from L3 (sum of weight * that neuron's live Value); it stays ~0 until the
 added layers start to matter.
 
+For worlds with more than one food zone it adds a per-zone table: standing
+food, residents (by position; the world size setting is a radius), their
+median genes and top species. Two summary numbers follow: how tied species
+are to zones, and how much residents' brains resemble their own zone.
+
 Usage: python tools/run_stats.py <world save .zip> [more saves...]
 """
 
@@ -107,7 +112,96 @@ def summarize(path):
     out, val = stats[best][2]
     print(f"strongest: bibite gen {bibites[best]['genes']['gen']} species "
           f"{bibites[best]['genes']['speciesID']}: {val:+.4f} into {out}")
+    settings = json.loads(z.read("settings.bb8settings").decode("utf-8-sig"))
+    if len(settings["zones"]) > 1:
+        pellets = json.loads(z.read("pellets.bb8scene").decode("utf-8-sig"))["pellets"]
+        zone_breakdown(settings, pellets, bibites)
     print()
+
+
+# Ungrazed plant pellets hold ~20% of their nominal size, so an untouched zone
+# sits at ~20% of its biomass cap (measured on the empty 7zone_hex_test_0 world
+# and on test 2's starting save).
+UNGRAZED_FILL = 0.2
+ZONE_GENES = ["SizeRatio", "SpeedRatio", "MouthMusclesWAG", "ViewRadius", "Diet"]
+
+
+def zone_breakdown(settings, pellets, bibites):
+    """Per food zone: standing food, residents, species mix, genes, brains."""
+    zones = settings["zones"]
+    world_r = settings["independents"]["SimulationSize"]["Value"]  # a radius
+    density = settings["independents"]["biomassDensity"]["Value"]
+
+    def zone_of(x, y):
+        for zn in zones:
+            r = zn["radius"] * (world_r if zn["radiusIsRelative"] else 1)
+            if math.hypot(x - zn["posX"] * world_r, y - zn["posY"] * world_r) <= r:
+                return zn["name"]
+        return "gaps"
+
+    home = [zone_of(*b["transform"]["position"]) for b in bibites]
+    names = [zn["name"] for zn in zones] + ["gaps"]
+    food = {g["zone"]: sum(p["pellet"]["amount"] for p in g["pellets"]
+                           if p["pellet"]["material"] == "Plant") for g in pellets}
+
+    print("\nper zone (food % = standing plant energy vs. the zone's ungrazed level)")
+    print(f"{'zone':12} {'fert':>5} {'biom':>5} {'size':>5} {'food %':>6} "
+          f"{'bibites':>7}  " + "  ".join(f"{g[:9]:>9}" for g in ZONE_GENES)
+          + "  top species (share of zone)")
+    for name in names:
+        members = [b for b, h in zip(bibites, home) if h == name]
+        zn = next((zn for zn in zones if zn["name"] == name), None)
+        if zn:
+            r = zn["radius"] * (world_r if zn["radiusIsRelative"] else 1)
+            ungrazed = UNGRAZED_FILL * density * zn["biomassDensity"] * math.pi * r * r
+            cols = (f"{zn['fertility']:5.2f} {zn['biomassDensity']:5.2f} "
+                    f"{zn['pelletSize']:5.2f} {100 * food.get(name, 0) / ungrazed:5.0f}%")
+        else:
+            cols = f"{'':5} {'':5} {'':5} {'':>6}"
+        genes = "  ".join(
+            f"{st.median(b['genes']['genes'][g] for b in members):9.3g}" if members else f"{'-':>9}"
+            for g in ZONE_GENES)
+        top = collections.Counter(b["genes"]["speciesID"] for b in members).most_common(2)
+        tops = ", ".join(f"{s} ({c / len(members):.0%})" for s, c in top)
+        print(f"{name:12} {cols} {len(members):7}  {genes}  {tops}")
+
+    # Species clustering: chance two members of one species share a zone,
+    # relative to two random bibites. 1 = well mixed; higher = species are
+    # tied to zones.
+    def same_zone_chance(groups):
+        pairs = same = 0
+        for g in groups:
+            n = len(g)
+            pairs += n * (n - 1) / 2
+            same += sum(c * (c - 1) / 2 for c in collections.Counter(g).values())
+        return same / pairs if pairs else 0.0
+
+    by_species = collections.defaultdict(list)
+    for b, h in zip(bibites, home):
+        by_species[b["genes"]["speciesID"]].append(h)
+    ratio = same_zone_chance(by_species.values()) / same_zone_chance([home])
+    print(f"species tied to zones: {ratio:.2f}x  "
+          "(how much likelier two same-species bibites share a zone than two random ones; 1 = mixed)")
+
+    # Brains: distance from each bibite's weights to its own zone's average
+    # (leaving itself out) vs. to other zones' averages. Below 1 = residents
+    # of a zone are more alike than bibites from different zones.
+    vecs = [[s["Weight"] for s in b["brain"]["Synapses"]] for b in bibites]
+    groups = collections.defaultdict(list)
+    for v, h in zip(vecs, home):
+        groups[h].append(v)
+    sums = {h: [sum(c) for c in zip(*vs)] for h, vs in groups.items() if len(vs) >= 5}
+    ratios = []
+    for v, h in zip(vecs, home):
+        if h not in sums:
+            continue
+        n = len(groups[h])
+        own = [(s - x) / (n - 1) for s, x in zip(sums[h], v)]
+        others = [math.dist(v, [s / len(groups[o]) for s in sums[o]])
+                  for o in sums if o != h]
+        ratios.append(math.dist(v, own) / st.mean(others))
+    print(f"brains vs. own zone: {st.median(ratios):.3f}  "
+          "(median distance to own zone's average / to other zones' averages; 1 = no zone structure)")
 
 
 if __name__ == "__main__":
