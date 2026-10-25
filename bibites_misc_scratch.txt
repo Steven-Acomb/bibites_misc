@@ -1,5 +1,82 @@
 
 ---
+10/25/2026:
+
+Current sim has:
+__
+1.335 ME
+2.12 kE/s
+6.7k pellets
+
+= avg 1.335*10^6 E / 6.7*10^3 P = 199.253731343 E/P ~= 200 E/P
+__
+
+Consists of two zones: "World" and "Zone 1", where:
+"World":
+__
+1.26 ME
+~6.28k pellets
+(1.26*10^6) / (6.28*10^3) = 200.636942675 E/P ~= 200 E/P
+__
+
+
+"Zone 1":
+__
+78.54 kE
+~393 pellets
+(78.54*10^3) / (393) = 199.847328244 E/P ~= 200 E/P
+__
+
+
+
+3 Islands scenario has 4 zones:
+
+Eastern Island:
+__
+Fertility = 10
+Pellet Size = 1.58
+Biomass = 10
+Spawn distribution: "Center to edge circle"
+Size scales with sim = True
+Radius = 0.2
+posX = 0.75
+posY = 0.0
+movement = "None"
+__
+
+Southern Island:
+__
+Fertility = 10
+Pellet Size = 10
+Biomass = 10
+Spawn distribution: "Center to edge circle"
+Size scales with sim = True
+Radius = 0.2
+posX = -0.375
+posY = -0.65
+movement = "None"
+__
+
+Northern Island:
+__
+Fertility = 5.62
+Pellet Size = 0.25
+Biomass = 5.62
+Spawn distribution: "Center to edge circle"
+Size scales with sim = True
+Radius = 0.2
+posX = -0.375
+posY = 0.65
+movement = "None"
+__
+
+
+
+
+
+7 zone hex idea:
+Seven zones basically arranged like the 3 islands except with them touching eachother packed like a hexagon shape, where over all we have about the same peak energy and average energy the sim does now, but the zones are arranged such that left to right the pellet size increases and top to bottom the 
+
 ---
 10/21/2026:
 
