@@ -53,3 +53,26 @@ on a gene's current value, so genes stuck near 0 can climb back out. That
 matters here: BrainMutationSigma had hit 0 in 274 bibites.
 
 At x100 the game showed 20 tps and sim/real x0.51.
+
+### 10-24 save (resumed from an autosave after a PC crash)
+
+Numbers from `python tools/run_stats.py <save.zip>`:
+
+- **Population:** 570 bibites in 59 species, down from 956 in 38.
+  Generations 18–37 (median 32), so about 14 generations since 10-22.
+- **Mutation genes:**
+  - BrainMutationSigma median 0.0128 (was 0.0048). 185 bibites are at 0.
+  - AverageMutationNumber median 1.49 (was 0.31).
+- **Box weights:** median 442 non-zero box synapses (was 270). The largest
+  box weight per bibite has a median of 0.30 (was 0.10) and a max of 0.54.
+- **Box push on outputs:** median 0.032 (was 0.005), max 0.24. The max is a
+  Want2Attack push in species 11690; Herding and Want2Lay also reach ~0.2.
+- **But it's constant, not sensing.**
+  - In the strongest case, L3N9's own bias (sin(−0.52) ≈ −0.49) times the
+    −0.51 L3N9→Want2Attack weight adds a fixed +0.25. That offsets
+    Want2Attack's bias, which has drifted to −0.415.
+  - To find how much of the push comes from inputs, I re-ran one tick of the
+    box with real inputs and again with inputs zeroed. The input-driven part
+    is at most 0.006 (median 0.0005) across all 570.
+  - So the box currently acts as extra output bias. The input→L1→L2→L3→output
+    paths are still too weak to matter.
