@@ -1,9 +1,10 @@
 """Summarize a NeuronBox world save: population, mutation genes, and how far
-the hidden "box" has drifted from its all-zero start.
+the added hidden layers (L1N1..L3N12 and their synapses) have drifted from
+their all-zero start.
 
-"Box drive" for an output is the input it currently receives from the last
-box layer (sum of weight * that neuron's live Value); it stays ~0 while the
-box is dormant.
+"Push on output" is, for an output, the input it currently receives
+from L3 (sum of weight * that neuron's live Value); it stays ~0 until the
+added layers start to matter.
 
 Usage: python tools/run_stats.py <world save .zip> [more saves...]
 """
@@ -15,7 +16,7 @@ import sys
 import zipfile
 
 
-def is_box(desc):
+def is_added(desc):
     return desc[0] == "L" and desc[1].isdigit()
 
 
@@ -24,12 +25,12 @@ def bibite_stats(b):
     nonzero, max_w, drive = 0, 0.0, collections.defaultdict(float)
     for s in b["brain"]["Synapses"]:
         a, c = nodes[s["NodeIn"]], nodes[s["NodeOut"]]
-        if not (is_box(a["Desc"]) or is_box(c["Desc"])):
+        if not (is_added(a["Desc"]) or is_added(c["Desc"])):
             continue
         if s["Weight"]:
             nonzero += 1
             max_w = max(max_w, abs(s["Weight"]))
-        if is_box(a["Desc"]) and not is_box(c["Desc"]) and s["En"]:
+        if is_added(a["Desc"]) and not is_added(c["Desc"]) and s["En"]:
             drive[c["Desc"]] += s["Weight"] * a["Value"]
     top = max(drive.items(), key=lambda kv: abs(kv[1]), default=("-", 0.0))
     return nonzero, max_w, top
@@ -57,9 +58,9 @@ def summarize(path):
         xs = [g[k] for g in genes]
         print(f"{k:22}{spread(xs)}  zeros {sum(x == 0 for x in xs)}")
     stats = [bibite_stats(b) for b in bibites]
-    print(f"nonzero box synapses  {spread((s[0] for s in stats), '{}')}  (of 1224)")
-    print(f"largest box |weight|  {spread(s[1] for s in stats)}")
-    print(f"largest box drive     {spread(abs(s[2][1]) for s in stats)}")
+    print(f"nonzero added synapses  {spread((s[0] for s in stats), '{}')}  (of 1224)")
+    print(f"largest added |weight|  {spread(s[1] for s in stats)}")
+    print(f"largest push on output  {spread(abs(s[2][1]) for s in stats)}")
     best = max(range(len(stats)), key=lambda i: abs(stats[i][2][1]))
     out, val = stats[best][2]
     print(f"strongest: bibite gen {bibites[best]['genes']['gen']} species "
