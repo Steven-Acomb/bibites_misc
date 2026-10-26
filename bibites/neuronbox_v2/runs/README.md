@@ -41,9 +41,17 @@ Note: the world size setting (20 ku) is a radius.
 |---|---|---|---|---|---|---|
 | p4 | 29.0 | 731 | 38 | 1.28× | 0.965 | 0.007 |
 | p5 | 30.8 | 573 | 40 | 1.73× | 0.930 | 0.011 |
+| p6 | 32.4 | 538 | 43 | 1.92× | 0.966 | 0.010 |
 
 At p5, residents per zone are West_North 149, West_Middle 98, East_North 72,
 Center 71, East_Middle 58, East_South 44, West_South 33, and 48 in the gaps.
+
+At p6, residents per zone are West_North 133, West_Middle 106, East_North 71,
+Center 64, East_Middle 52, East_South 28, West_South 19, and 65 in the gaps.
+
+East_Middle (big pellets) has the highest median mouth muscles: 3.66, against
+2.0–2.8 elsewhere. West_Middle (small pellets) has the highest median view
+radius: 173, against 127–148 elsewhere.
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
