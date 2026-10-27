@@ -54,6 +54,7 @@ table below is recomputed with living bibites only.
 | p9 | 37.9 | 393 | 47 | 1.41× | 0.978 | 0.0028 / 0.022 / 36 |
 | p10 | 40.9 | 432 | 50 | 1.61× | 0.954 | 0.0034 / 0.019 / 31 |
 | 10-26 | 44.8 | 529 | 56 | 1.41× | 0.967 | 0.0048 / 0.040 / 62 |
+| 10-27 | 48.3 | 575 | 59 | 1.69× | 0.935 | 0.0061 / 0.031 / 133 |
 
 Notes:
 - p8→p9 ran overnight in the background at ~0.19 sim h per real hour
@@ -64,6 +65,16 @@ Notes:
   clear trend yet.
 - Zone gene patterns flip between saves (e.g. East_Middle mouth muscles).
   At 10-26 the biggest mouths are in East_South (5.3) and West_South (5.1).
+- 10-26 → 10-27 ran 3.5 sim h in ~11.4 real h (~0.31 sim h per real hour).
+- **Two body plans at 10-27:**
+  - Big mouth, fast and lean: species 12274 and its offshoot 12401 (created
+    at 44.8 h). Mouth muscles ~7.7, speed ~1.6, size ~0.9, view ~190. Mostly
+    on the west side (West_Middle, West_North, West_South).
+  - Small mouth, bigger and slower: 12242. Mouth ~2.0, speed ~1.1, size
+    ~1.2. Mostly in West_North, East_North and Center.
+- Mouth muscles by zone are 7.5 in West_Middle (small pellets) against 2.8 in
+  East_Middle (big pellets), even excluding 12401. East_Middle has few
+  residents (39) and 84% of its food left.
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
