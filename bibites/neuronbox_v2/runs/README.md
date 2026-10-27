@@ -37,25 +37,33 @@ Meanwhile the herbivore run (test 2) continues.
 `python tools/run_stats.py <save>` prints a per-zone table for this world.
 Note: the world size setting (20 ku) is a radius.
 
-| Save | Sim h | Bibites | Gen max | Species tied to zones | Brains vs own zone | Max input-dependent push |
+**Correction (2026-10-26):** saves also contain bibites that have died but
+not yet been removed (`body.dead`), about 30–40% of the saved bibites.
+Before this fix, `run_stats.py` counted them as alive, so every population
+count and per-zone count logged before 10-26 is too high. That includes the
+pre-hex test 2 numbers below, e.g. "956 bibites" at 10-22 was 691 alive. The
+table below is recomputed with living bibites only.
+
+| Save | Sim h | Alive | Gen max | Species tied to zones | Brains vs own zone | Input-dependent push (median / max / count >0.01) |
 |---|---|---|---|---|---|---|
-| p4 | 29.0 | 731 | 38 | 1.28× | 0.965 | 0.007 |
-| p5 | 30.8 | 573 | 40 | 1.73× | 0.930 | 0.011 |
-| p6 | 32.4 | 538 | 43 | 1.92× | 0.966 | 0.010 |
-| p7 | 33.2 | 599 | 43 | 1.53× | 0.948 | 0.012 |
+| p4 | 29.0 | 485 | 38 | 1.35× | 0.979 | 0.0008 / 0.006 / 0 |
+| p5 | 30.8 | 331 | 40 | 1.64× | 0.959 | 0.0011 / 0.011 / 1 |
+| p6 | 32.4 | 320 | 43 | 1.63× | 0.971 | 0.0013 / 0.010 / 0 |
+| p7 | 33.2 | 345 | 43 | 1.39× | 0.953 | 0.0017 / 0.012 / 1 |
+| p8 | 36.0 | 344 | 44 | 1.31× | 0.967 | 0.0024 / 0.022 / 15 |
+| p9 | 37.9 | 393 | 47 | 1.41× | 0.978 | 0.0028 / 0.022 / 36 |
+| p10 | 40.9 | 432 | 50 | 1.61× | 0.954 | 0.0034 / 0.019 / 31 |
+| 10-26 | 44.8 | 529 | 56 | 1.41× | 0.967 | 0.0048 / 0.040 / 62 |
 
-At p5, residents per zone are West_North 149, West_Middle 98, East_North 72,
-Center 71, East_Middle 58, East_South 44, West_South 33, and 48 in the gaps.
-
-At p6, residents per zone are West_North 133, West_Middle 106, East_North 71,
-Center 64, East_Middle 52, East_South 28, West_South 19, and 65 in the gaps.
-
-East_Middle (big pellets) has the highest median mouth muscles: 3.66, against
-2.0–2.8 elsewhere. West_Middle (small pellets) has the highest median view
-radius: 173, against 127–148 elsewhere.
-
-At p7, East_Middle's mouth muscles fell back to 2.55, so that pattern didn't
-hold. West_Middle's view radius held at 168.
+Notes:
+- p8→p9 ran overnight in the background at ~0.19 sim h per real hour
+  (Windows throttling). In focus with throttling disabled, ~0.65–0.8.
+- Input-dependent push is the steady trend: the median grew ~6× from p4 to
+  10-26 (gen max 38→56).
+- Species-zone tie and brain-zone numbers fluctuate between saves with no
+  clear trend yet.
+- Zone gene patterns flip between saves (e.g. East_Middle mouth muscles).
+  At 10-26 the biggest mouths are in East_South (5.3) and West_South (5.1).
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 

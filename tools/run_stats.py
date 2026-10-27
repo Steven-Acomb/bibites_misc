@@ -89,12 +89,15 @@ def spread(xs, fmt="{:.4g}"):
 
 def summarize(path):
     z = zipfile.ZipFile(path)
-    bibites = [json.loads(z.read(n).decode("utf-8-sig"))
-               for n in z.namelist() if n.startswith("bibites/")]
+    saved = [json.loads(z.read(n).decode("utf-8-sig"))
+             for n in z.namelist() if n.startswith("bibites/")]
+    # Saves also hold bibites that have died but not yet been removed.
+    bibites = [b for b in saved if not b["body"]["dead"]]
     genes = [b["genes"]["genes"] for b in bibites]
     print(f"== {path}")
     species = collections.Counter(b["genes"]["speciesID"] for b in bibites)
-    print(f"bibites {len(bibites)}  species {len(species)}  "
+    print(f"bibites {len(bibites)} alive ({len(saved) - len(bibites)} dead skipped)  "
+          f"species {len(species)}  "
           f"top {species.most_common(3)}")
     print(f"generation            {spread((b['genes']['gen'] for b in bibites), '{}')}")
     print(f"age (sim min)         {spread(b['clock']['timeAlive'] / 60 for b in bibites)}")
