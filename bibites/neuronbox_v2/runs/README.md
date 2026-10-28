@@ -55,6 +55,7 @@ table below is recomputed with living bibites only.
 | p10 | 40.9 | 432 | 50 | 1.61× | 0.954 | 0.0034 / 0.019 / 31 |
 | 10-26 | 44.8 | 529 | 56 | 1.41× | 0.967 | 0.0048 / 0.040 / 62 |
 | 10-27 | 48.3 | 575 | 59 | 1.69× | 0.935 | 0.0061 / 0.031 / 133 |
+| 10-28 | 54.0 | 572 | 56 | 1.26× | 0.957 | 0.0086 / 0.070 / 247 |
 
 Notes:
 - p8→p9 ran overnight in the background at ~0.19 sim h per real hour
@@ -75,6 +76,18 @@ Notes:
 - Mouth muscles by zone are 7.5 in West_Middle (small pellets) against 2.8 in
   East_Middle (big pellets), even excluding 12401. East_Middle has few
   residents (39) and 84% of its food left.
+- **10-28: the big-mouth line swept.**
+  - 12401 has 181 of 572. 12242 (small mouth) is down to 1 bibite, and only
+    55 bibites have mouth muscles below 4.
+  - Mouth muscles are ~7 in every zone, and species-zone tie fell to 1.26×.
+  - Run speed 10-27 → 10-28: 5.6 sim h in ~25 real h.
+- **10-28: what the input-dependent push responds to.** For the top 5
+  bibites, nearly all of it comes from TimeAlive and Maturity. Those inputs
+  grow large (TimeAlive in minutes, up to ~85; Maturity up to ~13), so even
+  tiny weights from them add up. These are age-dependent behaviors, not
+  reactions to food or other bibites. Most common output carrying it:
+  Herding (103 of the 247 bibites above 0.01), then Want2Eat (35) and
+  PhereOut1 (34).
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
