@@ -47,6 +47,23 @@ that every living herbivore descends from:
 - v2 at 10-30 (gen 62: 97% from gen 36) is in line with 2025 at a similar
   stage (gen 41: 90% from gen 17).
 
+**Input-dependent push in the 2025 run** (herbivores, same measurement as
+`run_stats.py`; v1 has 2 added layers, so its input→output paths are 3
+weights long, not 4):
+
+| Save | Gen max | Median | p90 | Max | Above 0.1 |
+|---|---|---|---|---|---|
+| 07-20 | 137 | 0.053 | 0.094 | 0.15 | 20 of 310 |
+| 07-26 | 357 | 0.166 | 0.250 | 0.44 | 462 of 533 |
+| 08-08 | 638 | 0.303 | 0.463 | 0.69 | 1206 of 1256 |
+| 09-07 | 875 | 0.313 | 0.503 | 0.79 | 1233 of 1256 |
+
+In the final save's top 40 bibites, the push depends mostly on Speed, then
+TimeAlive, Minute, Maturity, LifeRatio, Tic, EnergyRatio and Fullness.
+External senses barely register (PlantCloseness ~0.1, against ~17 for Speed,
+summed). So v1's added layers became controllers of internal state (speed,
+age, time, energy), not processors of what the bibite sees.
+
 ## Test 2, hex phase (from 2026-10-25)
 
 **The switch (sim time 28.8 h):**
