@@ -6,6 +6,10 @@ their all-zero start.
 from L3 (sum of weight * that neuron's live Value); it stays ~0 until the
 added layers start to matter.
 
+It also sweeps each input over its typical range in the population to show
+which inputs the added layers respond to, split into the bibite's own
+state/time and its surroundings (the second group is what sensing needs).
+
 For worlds with more than one food zone it adds a per-zone table: standing
 food, residents (by position; the world size setting is a radius), their
 median genes and top species. Two summary numbers follow: how tied species
@@ -17,6 +21,7 @@ Usage: python tools/run_stats.py <world save .zip> [more saves...]
 import collections
 import json
 import math
+import random
 import statistics as st
 import sys
 import zipfile
@@ -81,6 +86,86 @@ def input_driven(b):
     return max((abs(real[o] - zero[o]) for o in real), default=0.0)
 
 
+# Inputs about the bibite itself or the clock, vs. inputs about its surroundings.
+OWN_STATE = {"EnergyRatio", "Maturity", "LifeRatio", "Fullness", "Speed",
+             "RotationSpeed", "IsGrabbing", "AttackedDamage", "EggStored",
+             "Tic", "Minute", "TimeAlive"}
+SWEEP_SAMPLE = 150
+
+
+def sweep_effects(b, ranges):
+    """For each input: biggest change at any output (from L3) when that input
+    is moved from the low to the high end of its population range, all other
+    values held at their saved state. Same one-tick model as input_driven."""
+    nodes = {n["Index"]: n for n in b["brain"]["Nodes"]}
+    saved = {n["Desc"]: n["Value"] for n in nodes.values()}
+    kind = {n["Desc"]: n["archetype"] for n in nodes.values()}
+    incoming = collections.defaultdict(list)
+    for s in b["brain"]["Synapses"]:
+        if s["En"] and s["Weight"]:
+            incoming[nodes[s["NodeOut"]]["Desc"]].append(
+                (nodes[s["NodeIn"]]["Desc"], s["Weight"]))
+    added = [n for n in nodes.values() if is_added(n["Desc"])]
+    added.sort(key=lambda n: (n["Desc"][1], int(n["Desc"][3:])))
+    outputs = [o for o in incoming if kind[o] == 1]
+
+    def push(override):
+        val = dict(saved)
+        val.update(override)
+        for n in added:
+            layer = int(n["Desc"][1])
+            x = n["baseActivation"]
+            for src, w in incoming[n["Desc"]]:
+                if kind[src] == 0 or (is_added(src) and int(src[1]) == layer - 1):
+                    x += w * val[src]
+                else:
+                    x += w * saved[src]
+            val[n["Desc"]] = math.sin(x)
+        return [sum(w * val[s] for s, w in incoming[o] if is_added(s)) for o in outputs]
+
+    effects = {}
+    for inp, (lo, hi) in ranges.items():
+        low, high = push({inp: lo}), push({inp: hi})
+        effects[inp] = max((abs(a - c) for a, c in zip(low, high)), default=0.0)
+    return effects
+
+
+def input_sweep(bibites):
+    """Which inputs the added layers respond to, measured fairly: each input
+    swept over its 5th-95th percentile range across the population."""
+    values = collections.defaultdict(list)
+    for b in bibites:
+        for n in b["brain"]["Nodes"]:
+            if n["archetype"] == 0:
+                values[n["Desc"]].append(n["Value"])
+    ranges = {}
+    for inp, xs in values.items():
+        xs.sort()
+        lo, hi = xs[int(0.05 * (len(xs) - 1))], xs[int(0.95 * (len(xs) - 1))]
+        if hi > lo:
+            ranges[inp] = (lo, hi)
+    rng = random.Random(0)
+    sample = rng.sample(bibites, min(SWEEP_SAMPLE, len(bibites)))
+    per_input = collections.defaultdict(list)
+    for b in sample:
+        for inp, e in sweep_effects(b, ranges).items():
+            per_input[inp].append(e)
+
+    print(f"\nwhat the added layers respond to (each input swept over its typical range; "
+          f"biggest output change, median / 90th pct over {len(sample)} bibites)")
+    for label, group in [("own state & time", lambda i: i in OWN_STATE),
+                         ("surroundings", lambda i: i not in OWN_STATE)]:
+        rows = sorted(((i, st.median(v), sorted(v)[int(0.9 * (len(v) - 1))])
+                       for i, v in per_input.items() if group(i)),
+                      key=lambda r: -r[1])
+        best = [max(e for i, e in zip(per_input, col) if group(i))
+                for col in zip(*per_input.values())]
+        print(f"  {label}: strongest input per bibite median {st.median(best):.4f}")
+        for i, m, p90 in rows[:5]:
+            lo, hi = ranges[i]
+            print(f"    {i:16} {m:.4f} / {p90:.4f}   (range {lo:.3g} to {hi:.3g})")
+
+
 def spread(xs, fmt="{:.4g}"):
     xs = list(xs)
     return (f"min {fmt.format(min(xs))}  med {fmt.format(st.median(xs))}  "
@@ -115,6 +200,7 @@ def summarize(path):
     out, val = stats[best][2]
     print(f"strongest: bibite gen {bibites[best]['genes']['gen']} species "
           f"{bibites[best]['genes']['speciesID']}: {val:+.4f} into {out}")
+    input_sweep(bibites)
     settings = json.loads(z.read("settings.bb8settings").decode("utf-8-sig"))
     if len(settings["zones"]) > 1:
         pellets = json.loads(z.read("pellets.bb8scene").decode("utf-8-sig"))["pellets"]
