@@ -56,6 +56,7 @@ table below is recomputed with living bibites only.
 | 10-26 | 44.8 | 529 | 56 | 1.41× | 0.967 | 0.0048 / 0.040 / 62 |
 | 10-27 | 48.3 | 575 | 59 | 1.69× | 0.935 | 0.0061 / 0.031 / 133 |
 | 10-28 | 54.0 | 572 | 56 | 1.26× | 0.957 | 0.0086 / 0.070 / 247 |
+| 10-30 | 64.4 | 626 | 62 | 1.26× | 0.970 | 0.0115 / 0.050 / 375 |
 
 Notes:
 - p8→p9 ran overnight in the background at ~0.19 sim h per real hour
@@ -88,6 +89,23 @@ Notes:
   reactions to food or other bibites. Most common output carrying it:
   Herding (103 of the 247 bibites above 0.01), then Want2Eat (35) and
   PhereOut1 (34).
+- **10-30: a single-ancestor sweep.**
+  - 97% of living bibites (606 of 626) descend from species 12401
+    *Printzilonum martinezfelixis*. It appeared at sim 44.8 h, generation 36,
+    as an offshoot of 12274, the big-mouth line.
+  - Tracing ancestry back from the current population: at 48 h one line was
+    already the ancestor of 94%. The descendants have since split into 61
+    species (equivalent to ~15 equally common ones).
+  - 12401's founder versus its parent's species snapshot:
+    - Diet 0.03 → 0, ClockSpeed 0.95 → 2.2, BroodTime 33 → 66,
+      GrowthMaturityExponent 0.04 → 0.48, BrainMutationSigma 0.031 → 0.0003.
+    - It also differs in 100 weights and 39 biases.
+    - The snapshots are of single individuals, so this can't say which
+      change mattered.
+  - Since 10-28 standing food fell in every zone; East_Middle (big pellets)
+    dropped from 92% to 43% as its residents rose 49 → 65. Median size went
+    from ~0.95 to ~0.82.
+  - Run speed 10-28 → 10-30: 10.4 sim h in ~53.5 real h.
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
