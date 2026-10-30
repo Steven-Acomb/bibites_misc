@@ -64,6 +64,31 @@ External senses barely register (PlantCloseness ~0.1, against ~17 for Speed,
 summed). So v1's added layers became controllers of internal state (speed,
 age, time, energy), not processors of what the bibite sees.
 
+**Sensitivity sweep (2026-10-30).** The input-dependent push compares
+inputs at their saved values against zero, which underrates inputs that
+happen to be 0 at save time. A fairer test: sweep each input over its
+5th–95th percentile range in the population and measure the biggest change
+at any output, from the added layers only.
+
+| Input | Range in 2025 final | 2025 final (gen 875) median / p90 | v2 at 10-30 (gen 62) median / p90 |
+|---|---|---|---|
+| TimeAlive | 0.5–67 | 0.30 / 0.59 | 0.023 / 0.038 |
+| Speed | 1–9.8 | 0.31 / 0.55 | 0.006 / 0.013 |
+| Minute | 0–3.9 | 0.19 / 0.38 | 0.008 / 0.014 |
+| Maturity | 0.1–4 | 0.11 / 0.19 | 0.010 / 0.020 |
+| Fullness | 0–0.96 | 0.063 / 0.15 | 0.002 / 0.004 |
+| PlantCloseness | 0–1 | 0.029 / 0.051 | 0.001 / 0.002 |
+| NPlants | 0–0.25 | 0.025 / 0.040 | 0.001 / 0.002 |
+| NBibites | 0–0.25 | 0.019 / 0.035 | — |
+| PlantAngle | −0.09–0.07 | 0.009 / 0.015 | 0.001 / 0.002 |
+
+- Even measured fairly, v1's external senses stayed ~10× weaker than its
+  internal/time inputs after 875 generations.
+- Part of the reason is the inputs' real ranges. TimeAlive and Speed span
+  ~0–67 and ~1–10, while senses span ≤1. PlantAngle spans only ±0.09,
+  because Easy Herbivore's own PlantAngle→Rotate reflex keeps the nearest
+  plant nearly straight ahead.
+
 ## Test 2, hex phase (from 2026-10-25)
 
 **The switch (sim time 28.8 h):**
