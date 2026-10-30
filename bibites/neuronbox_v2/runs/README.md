@@ -21,6 +21,32 @@ Steve's plan for later:
 
 Meanwhile the herbivore run (test 2) continues.
 
+## Reference: sweeps in the 2025 NeuronBox 1 run
+
+Steve: a lucky descendant line taking over from a rough starting species is
+expected behavior, the system finding a lower energy state, and it keeps
+happening for a long time. The 2025 run confirms it.
+
+For each `Neuron_Box_Test_1_*` save on the A: drive, the most recent species
+that every living herbivore descends from:
+
+| Save | Sim h | Gen max | Common ancestor from gen | Generations back |
+|---|---|---|---|---|
+| 07-19 13:00 | 72 | 76 | 37 | ~39 |
+| 07-20 | 131 | 137 | 89 | ~48 |
+| 07-23 | 277 | 289 | 194 | ~95 |
+| 07-26 15:00 | 359 | 357 | 285 | ~72 |
+| 07-31 | 467 | 478 | 378 | ~100 |
+| 08-08 | 630 | 638 | 538 | ~100 |
+| 08-11 | 679 | 676 | 609 | ~67 |
+| 09-07 (final) | 878 | 875 | 817 | ~58 |
+
+- The whole population coalesced within ~40–100 generations at every point.
+  Sweeps never stopped.
+- Both runs make ~1 generation per sim-hour.
+- v2 at 10-30 (gen 62: 97% from gen 36) is in line with 2025 at a similar
+  stage (gen 41: 90% from gen 17).
+
 ## Test 2, hex phase (from 2026-10-25)
 
 **The switch (sim time 28.8 h):**
