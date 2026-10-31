@@ -8,18 +8,25 @@
 - **"Box push":** the input an output neuron currently receives from L3,
   i.e. Σ weight × L3 neuron value.
 
-## Shelved: carnivore (2026-10-22)
+## Planned: carnivore phase (on the roadmap, not cancelled)
 
 `NeuronBox_v2_Carnivore.bb8template` (built with `make_neuronbox.py --carnivore`)
-was checked in-game: brain intact and it eats meat.
+was checked in-game on 2026-10-22: brain intact, eats meat.
 
-Steve's plan for later:
-- Build a world like the herbivore one, but spawning meat instead of plants.
-- Gradually lower the meat spawn rate.
-- Gradually raise the rate of random bibite spawns.
-- Goal: evolve an actual predator.
+Steve's plan, once the herbivores have reached a reasonable point:
+1. Pause the herbivore run.
+2. Create a mirrored world for the carnivores whose zones spawn meat
+   instead of plants.
+3. Let them evolve there while slowly lowering the meat zones' fertility
+   and raising the spawn rate of random virgin bibites.
+4. Goal: real predators, later co-evolving with the herbivores.
 
-Meanwhile the herbivore run (test 2) continues.
+**GreenBibite → Want2Eat.** In Easy Herbivore this is −0.843: a bibite eats
+less when the nearest bibite is green. Steve calls it the devs' "green flag"
+(literally) that evolution is working, and both runs' winners turned green
+to exploit it. The 2025 carnivore flipped the sign, and v2 copies it exactly:
++0.3829782. That is not the mirror of −0.842978239: the last five digits
+match, but 0.84 became 0.38, which looks like a hand-editing slip.
 
 ## Reference: sweeps in the 2025 NeuronBox 1 run
 
