@@ -24,9 +24,9 @@ Steve's plan, once the herbivores have reached a reasonable point:
 **GreenBibite → Want2Eat.** In Easy Herbivore this is −0.843: a bibite eats
 less when the nearest bibite is green. Steve calls it the devs' "green flag"
 (literally) that evolution is working, and both runs' winners turned green
-to exploit it. The 2025 carnivore flipped the sign, and v2 copies it exactly:
-+0.3829782. That is not the mirror of −0.842978239: the last five digits
-match, but 0.84 became 0.38, which looks like a hand-editing slip.
+to exploit it. The 2025 carnivore flipped the sign but had +0.3829782, which
+looks like a hand-editing slip (0.84 → 0.38). On 2026-10-31 the v2
+carnivore was rebuilt with the exact mirror, +0.842978239.
 
 ## Reference: sweeps in the 2025 NeuronBox 1 run
 

@@ -16,7 +16,7 @@ previous-tick recurrence, bias before activation).
 
 --carnivore applies the 2025 NeuronBox_Complete_Carnivore edits to the base
 first: plant edges rewired to their meat equivalents, GreenBibite->Want2Eat
-flipped to +0.383, Diet 0.899, MouthMusclesWAG 1.5, StomachWAG 2.0.
+mirrored to +0.843, Diet 0.899, MouthMusclesWAG 1.5, StomachWAG 2.0.
 
 Usage:
   python tools/make_neuronbox.py <Easy Herbivore.bb8template> <layout.bb8template> <out.bb8template>
@@ -43,7 +43,9 @@ def make_carnivore(t):
         if src in PLANT_TO_MEAT:
             s["NodeIn"] = t.node(PLANT_TO_MEAT[src])["Index"]
         elif (src, dst) == ("GreenBibite", "Want2Eat"):
-            s["Weight"] = 0.3829782
+            # Exact mirror of Easy Herbivore's -0.842978239. The 2025 template
+            # had +0.3829782, a hand-editing slip.
+            s["Weight"] = -s["Weight"]
     genes = t.data["genes"]
     genes["Diet"] = 0.899495
     genes["MouthMusclesWAG"] = 1.5
