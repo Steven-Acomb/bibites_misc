@@ -27,6 +27,12 @@ less when the nearest bibite is green. Steve calls it the devs' "green flag"
 to exploit it. The 2025 carnivore flipped the sign but had +0.3829782, which
 looks like a hand-editing slip (0.84 → 0.38). On 2026-10-31 the v2
 carnivore was rebuilt with the exact mirror, +0.842978239.
+Checked whether 0.383 was engineered against the output function. Want2Eat
+is TanH with bias 1.228, so it outputs 0.842 with no green in view.
+- At full green, 0.383 gives 0.923 and the mirror gives 0.969. Tanh
+  saturates near 1, so the two behave almost alike.
+- No transfer-function logic explains 0.383; the matching digit tail
+  (…29782) points to a slip.
 
 ## Reference: sweeps in the 2025 NeuronBox 1 run
 
