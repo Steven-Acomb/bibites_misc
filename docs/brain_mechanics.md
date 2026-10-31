@@ -16,6 +16,7 @@ Verified 2026-10-21 on game v0.6.3.1 with `bibites/probes/BrainProbe.bb8template
 | **Version-0.6 files get RotationSpeed inserted on load** at Index 5, shifting every later node (biases, types, synapse endpoints). A file that already has RotationSpeed must say version "0.6.2" or it gets inserted twice. | NeuronBox_v2 first build: Accelerate's bias landed on Rotate → spun in place; save showed 87 nodes and a duplicate Want2Attack. |
 | **Hidden-node anchor y uses input-slot units (~1–32)**, not 0–1; x is 0 (inputs) … 1 (outputs). | v2 first build with y in 0–1 piled every hidden node at the top. |
 | **`BrainAverageMutation` is capped at 10** (brain mutations per birth). | NeuronBox_v2 template set 40; the spawned bibite had 10. No bibite in the 2025 run exceeded 10. |
+| **Want2Attack is bite strength (sigmoid, 0–1).** Below 0.15 there is no attack. Above it, the bibite bites anything in or entering its mouth, and keeps draining a target it bit last tick. The game's default activation is 0.1618. With bias 0 and no inputs (Easy Herbivore and both v2 templates), it sits at 0.5, so they always bite at half strength. | In-game tooltip (screenshot 2026-10-31). |
 | **Layout (`nodeAnchors`) lives only in templates**, keyed by node Inov; in-game rearranging isn't saved to `.bb8`. The game renumbers node Inovs on load. | — |
 
 ## Self-loop regimes for a sine neuron, x → sin(w·x + input)
