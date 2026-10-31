@@ -620,7 +620,7 @@
       "Inov": 199,
       "NodeIn": 10,
       "NodeOut": 34,
-      "Weight": -0.127082855,
+      "Weight": 0.127082855,
       "En": true
     },
     {

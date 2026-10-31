@@ -34,6 +34,13 @@ is TanH with bias 1.228, so it outputs 0.842 with no green in view.
 - No transfer-function logic explains 0.383; the matching digit tail
   (…29782) points to a slip.
 
+**2026-10-31 carnivore rebuild:**
+- BibiteAngle → Rotate was flipped to +0.127 (turn toward bibites),
+  matching every official hunting template.
+- GreenBibite → Want2Eat stays at +0.843.
+- Want2Attack and mouth size are left as is until we understand what those
+  values do in-game.
+
 **The game's own carnivore templates, for comparison (2026-10-31).**
 Official templates Squalus nova, Vulture, Scorpion, Parasite and Seeker
 shooter, plus Nigel in v0.5 format. Squalus nova is described as having
