@@ -69,6 +69,14 @@ generations. Track this with the "surroundings" lines of `tools/run_stats.py`.
     it from noise; see the 2025 sweep baseline.
 - Removing the Center also removes 1/7 of the plants unless the other zones
   get it back, so it doubles as a first step of "reducing plants".
-- Current settings, for reference: `worldWrapping` is on and `voidAvoidance`
-  is off. Worth knowing what the rim actually does to a bibite before relying
-  on void risk.
+
+## Void settings are deliberate (Steve, 2026-10-31)
+
+- **`voidAvoidance` off.** When on, an automatic safeguard overrides bibite
+  behavior to keep them inside fertile zones, like bowling-lane gutter guards.
+- **`worldWrapping` on.** No artificial "dies if it crosses this line" edge.
+  Hard hazards like that can be added deliberately in controlled places, and
+  Steve is choosing not to.
+- **The void's real danger is starvation.** That leaves room for interesting
+  adaptations: crossing the void (fat stores plus smart turning) versus
+  avoiding it, possibly as different strategies in different lines.
