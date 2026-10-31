@@ -29,3 +29,24 @@ Verified 2026-10-21 on game v0.6.3.1 with `bibites/probes/BrainProbe.bb8template
 
 Slow rhythms instead come from sine of the time inputs (TimeAlive, Minute, Tic):
 weight w from TimeAlive into a sine neuron gives a period of 2π/w minutes.
+
+## Feeding mechanics (community-reported, not measured here)
+
+From community discussion and a community feeding-model tool, gathered
+2026-10-31. Unverified; treat as a model.
+
+- **Jaw strength** grows with jaw area (mouth muscle investment × body size)
+  and metabolism, raised to a world-setting power. Size alone can give large
+  bibites strong jaws.
+- **Bite strength** = jaw strength × Want2Attack, with no bite when
+  Want2Attack ≤ 0.15. Bites happen once per bite period, which depends on
+  throat width, jaw mass and jaw strength. Idle time doesn't bank bites.
+- **Mouth opening** = Want2Eat × throat width (closed when Want2Eat ≤ 0.15).
+- **Want2Attack > Want2Eat** splits pellets: bitten pieces are dropped
+  instead of swallowed ("vomiting"). It is reportedly worse for pellets but
+  better against live bibites. Bibites that switch from pellets to prey with
+  age often evolve Want2Attack rising with age.
+- **Biting live bibites** also needs a big enough mouth relative to the
+  target's body. Below roughly a 0.25 size ratio no jaw strength gets
+  through armor. Fat stretches armor thinner.
+
