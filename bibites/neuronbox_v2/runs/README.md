@@ -34,6 +34,22 @@ is TanH with bias 1.228, so it outputs 0.842 with no green in view.
 - No transfer-function logic explains 0.383; the matching digit tail
   (…29782) points to a slip.
 
+**The game's own carnivore templates, for comparison (2026-10-31).**
+Official templates Squalus nova, Vulture, Scorpion, Parasite and Seeker
+shooter, plus Nigel in v0.5 format. Squalus nova is described as having
+evolved to kill.
+
+| | Squalus nova (shark) | Parasite | Seeker shooter | Nigel | Vulture (scavenger) | v2 carnivore |
+|---|---|---|---|---|---|---|
+| BibiteAngle → Rotate | **+11.3** | +2.5 | +0.77 (off) | +1.26 (concentration angle) | none (BibiteCloseness → Rotate −0.69) | −0.127 (inherited) |
+| GreenBibite → Want2Eat | **+1.27** | — | — | — | — | +0.843 |
+| Want2Attack inputs | bias +5, Tic −15 | BibiteCloseness +3.5, MeatCloseness +5.7, Fullness −5.8 | MeatCloseness +2.8, bias −2.8 | bibite concentration +2.7 | Speed +1.1, hidden +1 | none (bias 0 → constant 0.5) |
+| Mouth muscles | 7.6 | 2.1 | 6.4 | — | 9.0 | 1.5 |
+
+Every one that hunts steers toward bibites, and every carnivore wires
+Want2Attack to something. Squalus, Vulture and Easy Herbivore all share the
+Want2Eat bias of 1.228, which suggests a common dev-made base.
+
 ## Reference: sweeps in the 2025 NeuronBox 1 run
 
 Steve: a lucky descendant line taking over from a rough starting species is
