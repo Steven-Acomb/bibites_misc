@@ -30,23 +30,63 @@ Verified 2026-10-21 on game v0.6.3.1 with `bibites/probes/BrainProbe.bb8template
 Slow rhythms instead come from sine of the time inputs (TimeAlive, Minute, Tic):
 weight w from TimeAlive into a sine neuron gives a period of 2π/w minutes.
 
-## Feeding mechanics (community-reported, not measured here)
+## Feeding mechanics (from the game's code)
 
-From community discussion and a community feeding-model tool, gathered
-2026-10-31. Unverified; treat as a model.
+Read 2026-10-31 from the decompiled `BibitesAssembly.dll` (v0.6.3.1,
+`BibiteMouth`, `NEATBrain.UpdateSenses`, `FieldOfView`). The decompiled
+source is kept locally only (git-ignored `research_private/`); this is a
+paraphrase.
 
-- **Jaw strength** grows with jaw area (mouth muscle investment × body size)
-  and metabolism, raised to a world-setting power. Size alone can give large
-  bibites strong jaws.
-- **Bite strength** = jaw strength × Want2Attack, with no bite when
-  Want2Attack ≤ 0.15. Bites happen once per bite period, which depends on
-  throat width, jaw mass and jaw strength. Idle time doesn't bank bites.
-- **Mouth opening** = Want2Eat × throat width (closed when Want2Eat ≤ 0.15).
-- **Want2Attack > Want2Eat** splits pellets: bitten pieces are dropped
-  instead of swallowed ("vomiting"). It is reportedly worse for pellets but
-  better against live bibites. Bibites that switch from pellets to prey with
-  age often evolve Want2Attack rising with age.
-- **Biting live bibites** also needs a big enough mouth relative to the
-  target's body. Below roughly a 0.25 size ratio no jaw strength gets
-  through armor. Fat stretches armor thinner.
+**Mouth size and jaws**
+- Throat width = √(throat organ area), which comes from ThroatWAG.
+- Jaw area = body area × the jaw's share (MouthMusclesWAG); jaw mass is
+  proportional to jaw area.
+- Jaw strength = bitingPressure × (jaw area × metabolic rate)^(jawMusclesSizingPower / 2).
+- Bite period = √(throat width × jaw mass / jaw strength) × 70 × bitePeriodFactor.
+  The bite timer fills up to one period and doesn't bank beyond it.
+- The mouth's catch zone is wider for herbivores: its length is 7 − 8 × Diet
+  when Diet < 0.5, and 3 otherwise.
 
+**Each tick, for each object in the mouth (nearest first):**
+- **Swallow attempt.** The bibite tries to swallow if Want2Eat > 0.15 and
+  the bite timer is full. Mouth opening = Want2Eat × throat width.
+  - A pellet with radius ≤ opening/4 is swallowed whole and doesn't use up
+    the bite timer.
+  - A pellet with radius ≤ opening/2 is swallowed whole but uses one bite
+    period.
+  - A larger pellet can't be swallowed.
+  - A whole live bibite can be swallowed if its body length ≤ the opening
+    (half the opening costs a bite period). The swallower gets its stomach
+    contents plus its energy as meat.
+  - **Swallowing never needs Want2Attack.**
+- **Bite.** If swallowing didn't happen (or wasn't attempted) and
+  Want2Attack > 0.15, the bibite bites, once per bite period.
+  - Bite force = jaw strength × Want2Attack.
+  - The chunk size comes from force / (opening × the material's
+    cohesiveness), limited by the target's radius.
+  - **Pellets:** the opening is the Want2Eat mouth opening. If Want2Attack >
+    Want2Eat the chunk is ripped off as a separate pellet; otherwise it goes
+    into the stomach.
+  - **Live bibites:** the opening is Want2Attack × throat width, scaled by
+    the target's internals-to-effective-radius ratio. The target's armor
+    strength is subtracted from the first bite's force, and there is no
+    damage if bite force ≤ armor.
+  - Damage = bitingDamageFactor × target max health × chunk area / target
+    body area.
+  - While a bite continues on the same target, each tick deals damage ×
+    dt / (5 × bite period), with no wait. The meat produced goes into the
+    stomach if it fits.
+  - A bibite with 50+ kills whose total victim area ≥ 50 × its own area
+    becomes a "Reaper".
+- **Vomit.** Want2Eat < −0.15 makes the bibite vomit, once per bite period.
+
+**Inputs (`NEATBrain.UpdateSenses`)**
+- Red/Green/BlueBibite = the raw ColorR/G/B genes of a bibite in view
+  (selected in `FieldOfView`). They are **not** normalized by brightness.
+- Speed = normalized velocity.
+- Minute = clock chrono time / 60.
+- TimeAlive = time alive / 60.
+- NBibites/NPlants/NMeats = count in view / 4.
+- PheroSense = tanh(sum / 5).
+- BibiteCloseness/Angle and PlantCloseness/Angle are weighted
+  *concentrations* over everything in view, not just the nearest object.
