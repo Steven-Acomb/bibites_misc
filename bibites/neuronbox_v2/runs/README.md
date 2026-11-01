@@ -178,7 +178,11 @@ free (unspawned) biomass:
 **New readouts (2026-11-01).**
 
 `game_log.py --since <h> --genes` gives the doubling table and per-gene
-trends from the game's log. Decoded gene medians match the save's bibites
+trends from the game's log.
+The reader was verified against the in-game Stats panel on 2026-11-01.
+Values and times match exactly at the 1h, 10h and 2-day views, for Biomass
+and Entities Count. Point i of each resolution level sits (i+1) steps
+before the save, as the game draws it. Decoded gene medians match the save's bibites
 within histogram resolution: MouthMusclesWAG 8.18 vs 8.19, ViewRadius 194
 vs 196. A gene at exactly 0 reads slightly above 0.
 

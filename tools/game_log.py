@@ -115,15 +115,16 @@ def parallel_group(buf, off, n):
 
 def series(scales, push_counters, end_min):
     """Merge scales into one time series (oldest first), using the finest
-    resolution available for each period. Returns [(minute, values)]."""
+    resolution available for each period. Returns [(minute, values)].
+    Point i of a scale is placed (i + 1) steps before the save, the same as
+    the in-game graphs draw it (checked against them 2026-11-01)."""
     out, covered_from = [], end_min
     for k, pts in enumerate(scales):
         if not pts:
             break
         step = PARALLEL_STEPS_MIN[k]
-        lag = sum(push_counters[j] * PARALLEL_STEPS_MIN[j] for j in range(min(k, len(push_counters))))
         for i, vals in enumerate(pts):
-            t = end_min - lag - i * step
+            t = end_min - (i + 1) * step
             if t < covered_from:
                 out.append((t, vals))
         covered_from = min(t for t, _ in out) if out else end_min
