@@ -103,7 +103,9 @@ def build(base_path, layout_path, out_path, layers, width, mutations, sigma,
     genes["MutationAmountSigma"] = 0.01
     genes["ColorR"] = genes["ColorG"] = genes["ColorB"] = 0.5
 
-    base = ("Easy Herbivore mirrored onto meat (as NeuronBox_Complete_Carnivore)"
+    base = ("Easy Herbivore mirrored into a carnivore (plant senses rewired to "
+            "meat, GreenBibite->Want2Eat and BibiteAngle->Rotate sign-flipped, "
+            "Diet 0.9, MouthMusclesWAG 1.5, StomachWAG 2.0)"
             if carnivore else "Easy Herbivore")
     t.rename("NeuronBox_v2_Carnivore" if carnivore else "NeuronBox_v2", (
         f"Brain evolution starter. {base} plus {layers} hidden sine layers "
