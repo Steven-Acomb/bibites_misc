@@ -12,6 +12,21 @@ AFK runs.
 **Steve has rejected** (at v1/v2 design): weights starting slightly off
 zero, and input→L2 or L1→output shortcut connections.
 
+**Guiding principle (Steve, 2026-11-01):** "I don't want us engineering
+behavior at all. I want us to be engineering the systems within which
+behavior can emerge."
+- v2's all-zero internal weights were deliberate, so structure would
+  emerge purely from drift. That was an instrumental goal: see what
+  develops organically before engineering anything, to learn how evolution
+  in the game tends to go.
+- So v3 changes should shape the **system**: neuron types, connectivity,
+  how weights start, the world. They should never wire in a specific
+  behavior.
+  - Fits: a randomly initialized reservoir, mixed neuron types,
+    modularity, sparser connectivity.
+  - Doesn't fit: hand-designed circuits, seeded reflexes, or weights chosen
+    to produce a particular action.
+
 ## Claude's ideas (2026-11-01, unverified)
 
 ### Computational: raising the ceiling
