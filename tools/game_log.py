@@ -146,9 +146,12 @@ def hist_median(lo, hi, counts, span):
     return hi
 
 
-def gene_group(buf, off, end_min, minutes_since_log):
+def gene_group(buf, off, end_min):
     """Decode the hourly gene histograms into [(minute, {gene: median})],
-    oldest first."""
+    oldest first. Only the points the game displays are kept, timed the way
+    its Gene Analysis slider labels them (TimeOfPointInSerialConfig: the
+    n-th point sits n+1 steps back, steps growing per scale). Verified
+    against the panel 2026-11-01."""
     n_points, _n_data, n_bins, n_gene = struct.unpack_from("<iiii", buf, off)
     p = off + 16
     points = []
@@ -161,22 +164,18 @@ def gene_group(buf, off, end_min, minutes_since_log):
             p += 8 + 2 * n_bins
         points.append(genes)
     n_scales = len(SERIAL_FORMATS)
-    push_counters = list(buf[p:p + n_scales - 1])
     per_scale = list(buf[p + n_scales - 1:p + 2 * n_scales - 1])
-    out, i, age_h, step = [], 0, minutes_since_log / 60, 1
+    # Each scale stores its kept points, then "accumulator" slots waiting to
+    # be averaged into the next scale; the game displays only the former.
+    out, i, age_h, step = [], 0, 0, 1
     for k, (size, feed) in enumerate(SERIAL_FORMATS):
-        slots = size + feed
-        pending = push_counters[k] if k < len(push_counters) else 0
-        for j in range(min(slots, n_points - i)):
-            # In-scale points, then accumulators still waiting to be averaged
-            # into the next scale (older than every in-scale point).
-            if j < per_scale[k] or size <= j < size + pending:
-                genes = points[i + j]
-                med = {name: hist_median(*genes[g], mx - mn)
-                       for g, (name, mn, mx) in enumerate(GENES)}
-                out.append((end_min - 60 * (age_h + j * step), med))
-        i += min(slots, n_points - i)
-        age_h += (size + pending) * step
+        for j in range(per_scale[k]):
+            genes = points[i + j]
+            med = {name: hist_median(*genes[g], mx - mn)
+                   for g, (name, mn, mx) in enumerate(GENES)}
+            out.append((end_min - 60 * (age_h + (j + 1) * step), med))
+        i += min(size + feed, n_points - i)
+        age_h += size * step
         step *= max(feed, 1)
     return sorted(out, key=lambda q: q[0])
 
@@ -187,12 +186,11 @@ def read(path):
     scene = json.loads(z.read("scene.bb8scene").decode("utf-8-sig"))
     end_min = scene["simulatedTime"] / 60.0
     logger_off, logger_len = blocks(buf, 0, len(buf))[0]
-    (n_minutes,) = struct.unpack_from("<i", buf, logger_off + 4)
     groups = blocks(buf, logger_off + 8, logger_off + logger_len)
     result = {}
     for (name, cols), (off, n) in zip(STREAMS, groups):
         if cols is None:
-            result["genes"] = gene_group(buf, off, end_min, n_minutes)
+            result["genes"] = gene_group(buf, off, end_min)
             continue
         scales, pc = parallel_group(buf, off, n)
         result[name] = (cols, series(scales, pc, end_min))

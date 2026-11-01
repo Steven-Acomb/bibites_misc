@@ -182,7 +182,12 @@ trends from the game's log.
 The reader was verified against the in-game Stats panel on 2026-11-01.
 Values and times match exactly at the 1h, 10h and 2-day views, for Biomass
 and Entities Count. Point i of each resolution level sits (i+1) steps
-before the save, as the game draws it. Decoded gene medians match the save's bibites
+before the save, as the game draws it.
+The gene log was verified against the Gene Analysis panel the same day
+(Jaw Muscles WAG at 1 h, 2 h, 4 h and 3d0h ago). Bin counts and
+percentages match exactly, e.g. 158 of 551 (28.7%) at 1 h and 100 of 584
+(17.1%) at 72 h. Times now follow the panel's rule, and only the points the
+panel shows are kept. Decoded gene medians match the save's bibites
 within histogram resolution: MouthMusclesWAG 8.18 vs 8.19, ViewRadius 194
 vs 196. A gene at exactly 0 reads slightly above 0.
 
