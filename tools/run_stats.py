@@ -94,9 +94,11 @@ SWEEP_SAMPLE = 150
 
 
 def sweep_effects(b, ranges):
-    """For each input: biggest change at any output (from L3) when that input
-    is moved from the low to the high end of its population range, all other
-    values held at their saved state. Same one-tick model as input_driven."""
+    """For each input, when it is moved from the low to the high end of its
+    population range (all other values held at their saved state):
+    (biggest change at any output from L3, biggest change in any L3 neuron).
+    The second is internal structure that may not reach behavior yet.
+    Same one-tick model as input_driven."""
     nodes = {n["Index"]: n for n in b["brain"]["Nodes"]}
     saved = {n["Desc"]: n["Value"] for n in nodes.values()}
     kind = {n["Desc"]: n["archetype"] for n in nodes.values()}
@@ -108,6 +110,8 @@ def sweep_effects(b, ranges):
     added = [n for n in nodes.values() if is_added(n["Desc"])]
     added.sort(key=lambda n: (n["Desc"][1], int(n["Desc"][3:])))
     outputs = [o for o in incoming if kind[o] == 1]
+    last = max(int(n["Desc"][1]) for n in added)
+    top = [n["Desc"] for n in added if int(n["Desc"][1]) == last]
 
     def push(override):
         val = dict(saved)
@@ -121,12 +125,14 @@ def sweep_effects(b, ranges):
                 else:
                     x += w * saved[src]
             val[n["Desc"]] = math.sin(x)
-        return [sum(w * val[s] for s, w in incoming[o] if is_added(s)) for o in outputs]
+        return ([sum(w * val[s] for s, w in incoming[o] if is_added(s)) for o in outputs],
+                [val[d] for d in top])
 
     effects = {}
     for inp, (lo, hi) in ranges.items():
-        low, high = push({inp: lo}), push({inp: hi})
-        effects[inp] = max((abs(a - c) for a, c in zip(low, high)), default=0.0)
+        (out_lo, hid_lo), (out_hi, hid_hi) = push({inp: lo}), push({inp: hi})
+        effects[inp] = (max((abs(a - c) for a, c in zip(out_lo, out_hi)), default=0.0),
+                        max((abs(a - c) for a, c in zip(hid_lo, hid_hi)), default=0.0))
     return effects
 
 
@@ -147,12 +153,15 @@ def input_sweep(bibites):
     rng = random.Random(0)
     sample = rng.sample(bibites, min(SWEEP_SAMPLE, len(bibites)))
     per_input = collections.defaultdict(list)
+    per_input_hidden = collections.defaultdict(list)
     for b in sample:
-        for inp, e in sweep_effects(b, ranges).items():
-            per_input[inp].append(e)
+        for inp, (out_e, hid_e) in sweep_effects(b, ranges).items():
+            per_input[inp].append(out_e)
+            per_input_hidden[inp].append(hid_e)
 
     print(f"\nwhat the added layers respond to (each input swept over its typical range; "
-          f"biggest output change, median / 90th pct over {len(sample)} bibites)")
+          f"biggest output change, median / 90th pct over {len(sample)} bibites; "
+          f"L3 = biggest change inside the last added layer)")
     for label, group in [("own state & time", lambda i: i in OWN_STATE),
                          ("surroundings", lambda i: i not in OWN_STATE)]:
         rows = sorted(((i, st.median(v), sorted(v)[int(0.9 * (len(v) - 1))])
@@ -160,10 +169,14 @@ def input_sweep(bibites):
                       key=lambda r: -r[1])
         best = [max(e for i, e in zip(per_input, col) if group(i))
                 for col in zip(*per_input.values())]
-        print(f"  {label}: strongest input per bibite median {st.median(best):.4f}")
+        best_hidden = [max(e for i, e in zip(per_input_hidden, col) if group(i))
+                       for col in zip(*per_input_hidden.values())]
+        print(f"  {label}: strongest input per bibite median {st.median(best):.4f} at outputs, "
+              f"{st.median(best_hidden):.4f} inside L3 (internal, may not be used yet)")
         for i, m, p90 in rows[:5]:
             lo, hi = ranges[i]
-            print(f"    {i:16} {m:.4f} / {p90:.4f}   (range {lo:.3g} to {hi:.3g})")
+            print(f"    {i:16} {m:.4f} / {p90:.4f}   L3 {st.median(per_input_hidden[i]):.4f}"
+                  f"   (range {lo:.3g} to {hi:.3g})")
 
 
 def spread(xs, fmt="{:.4g}"):

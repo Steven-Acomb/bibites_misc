@@ -175,6 +175,41 @@ free (unspawned) biomass:
   29.0%, 41.0–53.2 h 30.3%, 53.2–77.6 h 32.6%. Gains per doubling are +1.3
   then +2.3 points, not shrinking, so still climbing.
 
+**New readouts (2026-11-01).**
+
+`game_log.py --since <h> --genes` gives the doubling table and per-gene
+trends from the game's log. Decoded gene medians match the save's bibites
+within histogram resolution: MouthMusclesWAG 8.18 vs 8.19, ViewRadius 194
+vs 196. A gene at exactly 0 reads slightly above 0.
+
+v2 since the hex swap (28.8 → 77.6 h), most-moved genes (net change as % of
+the gene's range, directionality):
+
+| Gene | Net change | Directionality |
+|---|---|---|
+| ColorB | −64% | 0.66 |
+| MouthMusclesWAG | +55% | 0.95 |
+| PheroSense | +44% | 1.00 |
+| EyeOffset | −44% | 0.66 |
+| LayTime | +34% | 0.95 |
+| StomachWAG | +34% | 1.00 |
+| ViewRadius | +23% | 0.97 |
+| SizeRatio | −15% | 0.62 |
+| SpeedRatio | 0% | 0.00 |
+
+**Hidden vs expressed** (`run_stats.py` sweep), the strongest input per
+bibite, median:
+
+| Save | Own state: outputs / L3 | Surroundings: outputs / L3 |
+|---|---|---|
+| p4 | 0.0014 / 0.013 | 0.0005 / 0.0036 |
+| 10-30 | 0.026 / 0.087 | 0.0039 / 0.013 |
+| 11-01 | 0.028 / 0.098 | 0.0065 / 0.021 |
+
+Outputs stay ~0.3× the L3 response in all three, so internal structure is
+growing in step with expression. There is no sign yet of unused internal
+state piling up.
+
 **Input-dependent push in the 2025 run** (herbivores, same measurement as
 `run_stats.py`; v1 has 2 added layers, so its input→output paths are 3
 weights long, not 4):
