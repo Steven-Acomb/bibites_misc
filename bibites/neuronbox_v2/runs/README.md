@@ -219,6 +219,38 @@ Outputs stay ~0.3× the L3 response in all three, so internal structure is
 growing in step with expression. There is no sign yet of unused internal
 state piling up.
 
+**Newborn mortality (2026-11-01).**
+
+From the game's log at 77.6 h, last hour:
+- 3,453 births and 3,454 deaths, with ~515 alive.
+- Age at death: q25 1.1 min, median 1.7 min, q75 3.6 min.
+- The median age at death has risen from 0.5 min (48 h earlier) to 1.7 min.
+
+So nearly every bibite dies within minutes of hatching.
+
+Recently dead newborns (≤3.2 min) in the 10-28 / 10-30 / 11-01 saves:
+- 779 of 786 died with zero energy (starvation). Only 5% had been attacked.
+- Median age at death was 0.86 min.
+
+Birth size decides it. The size at birth scales with HatchTime/BroodTime
+(`BibiteGenes.RootOfMaturityAtBirth`). Newborns in the saves by that ratio:
+
+| HatchTime/BroodTime | Newborns | Already dead | Median size |
+|---|---|---|---|
+| < 0.2 | 193 | 89% | 0.025 |
+| 0.2–0.3 | 325 | 71% | 0.079 |
+| 0.3–0.4 | 267 | 68% | 0.119 |
+| 0.4–0.5 | 164 | 59% | 0.146 |
+| ≥ 0.5 | 187 | 47% | 0.194 |
+
+"Already dead" is a snapshot of bodies in the saves, not a survival rate,
+but the gradient is clear.
+
+Blind bibites (view angle < 20°) turned up 18 times across 21 saves, at
+most 5 at once. All were ≤3.2 min old and none laid eggs: a recurring
+mutation, not a lineage. With 84% of dead bodies being newborns, the data
+can't show that blindness itself kills.
+
 **Input-dependent push in the 2025 run** (herbivores, same measurement as
 `run_stats.py`; v1 has 2 added layers, so its input→output paths are 3
 weights long, not 4):
