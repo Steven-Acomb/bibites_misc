@@ -8,7 +8,11 @@ added layers start to matter.
 
 It also sweeps each input over its typical range in the population to show
 which inputs the added layers respond to, split into the bibite's own
-state/time and its surroundings (the second group is what sensing needs).
+state/time and its surroundings (the second group is what sensing needs),
+and which outputs those inputs reach. A wiring report then compares how far
+each kind of added connection has drifted (feedback paths that rise above the
+rest are in use) and counts sine self-loops in the latch (1-bit memory) and
+chaotic regimes.
 
 For worlds with more than one food zone it adds a per-zone table: standing
 food, residents (by position; the world size setting is a radius), their
@@ -131,8 +135,10 @@ def sweep_effects(b, ranges):
     effects = {}
     for inp, (lo, hi) in ranges.items():
         (out_lo, hid_lo), (out_hi, hid_hi) = push({inp: lo}), push({inp: hi})
-        effects[inp] = (max((abs(a - c) for a, c in zip(out_lo, out_hi)), default=0.0),
-                        max((abs(a - c) for a, c in zip(hid_lo, hid_hi)), default=0.0))
+        per_output = {o: abs(a - c) for o, a, c in zip(outputs, out_lo, out_hi)}
+        effects[inp] = (max(per_output.values(), default=0.0),
+                        max((abs(a - c) for a, c in zip(hid_lo, hid_hi)), default=0.0),
+                        per_output)
     return effects
 
 
@@ -154,10 +160,19 @@ def input_sweep(bibites):
     sample = rng.sample(bibites, min(SWEEP_SAMPLE, len(bibites)))
     per_input = collections.defaultdict(list)
     per_input_hidden = collections.defaultdict(list)
+    # per output: strongest own-state and strongest surroundings input, per bibite
+    per_output = collections.defaultdict(lambda: ([], []))
     for b in sample:
-        for inp, (out_e, hid_e) in sweep_effects(b, ranges).items():
+        best_by_output = collections.defaultdict(lambda: [0.0, 0.0])
+        for inp, (out_e, hid_e, outs) in sweep_effects(b, ranges).items():
             per_input[inp].append(out_e)
             per_input_hidden[inp].append(hid_e)
+            slot = 0 if inp in OWN_STATE else 1
+            for o, e in outs.items():
+                best_by_output[o][slot] = max(best_by_output[o][slot], e)
+        for o, (own, sur) in best_by_output.items():
+            per_output[o][0].append(own)
+            per_output[o][1].append(sur)
 
     print(f"\nwhat the added layers respond to (each input swept over its typical range; "
           f"biggest output change, median / 90th pct over {len(sample)} bibites; "
@@ -177,6 +192,53 @@ def input_sweep(bibites):
             lo, hi = ranges[i]
             print(f"    {i:16} {m:.4f} / {p90:.4f}   L3 {st.median(per_input_hidden[i]):.4f}"
                   f"   (range {lo:.3g} to {hi:.3g})")
+    print("  which outputs the inputs reach (median over bibites of the strongest input's effect):")
+    print(f"    {'output':14} {'own state':>10} {'surroundings':>13}")
+    for o, (own, sur) in sorted(per_output.items(), key=lambda kv: -st.median(kv[1][1])):
+        print(f"    {o:14} {st.median(own):10.4f} {st.median(sur):13.4f}")
+
+
+# Regimes of a sine self-loop x -> sin(w*x + input), from docs/brain_mechanics.md
+LATCH_LO, LATCH_HI = 1.0, 2.26
+
+
+def wiring_report(bibites):
+    """How each kind of added connection has drifted, and whether any sine
+    self-loop has reached the latch (1-bit memory) or chaotic regime."""
+    kinds = collections.defaultdict(list)
+    loops = []
+    for b in bibites:
+        nodes = {n["Index"]: n for n in b["brain"]["Nodes"]}
+        for s in b["brain"]["Synapses"]:
+            a, c = nodes[s["NodeIn"]], nodes[s["NodeOut"]]
+            sa, sc = a["Desc"], c["Desc"]
+            if not (is_added(sa) or is_added(sc)):
+                continue
+            if sa == sc:
+                kind = "self-loops"
+                loops.append(s["Weight"])
+            elif a["archetype"] == 0:
+                kind = "inputs -> L1"
+            elif c["archetype"] == 1:
+                kind = "L3 -> outputs"
+            elif a["archetype"] == 1:
+                kind = "outputs -> L1 (feedback)"
+            elif int(sc[1]) == int(sa[1]) + 1:
+                kind = f"L{sa[1]} -> L{sc[1]}"
+            else:
+                kind = f"L{sa[1]} -> L{sc[1]} (feedback)"
+            kinds[kind].append(abs(s["Weight"]))
+    n = len(bibites)
+    print("\nadded wiring by kind (feedback weights well above the background drift = in use)")
+    print(f"  {'kind':26} {'per bibite':>10} {'mean |w|':>9} {'non-zero':>9} {'max |w|':>8}")
+    for kind, ws in sorted(kinds.items()):
+        print(f"  {kind:26} {len(ws) // n:10} {st.mean(ws):9.4f} "
+              f"{sum(w > 0 for w in ws) / len(ws):8.0%} {max(ws):8.3f}")
+    latch = sum(LATCH_LO < w < LATCH_HI for w in loops)
+    print(f"  self-loop regimes: leaky |w|<1 {sum(abs(w) < 1 for w in loops)}, "
+          f"latch {LATCH_LO}<w<{LATCH_HI} {latch}, chaotic w>{LATCH_HI} "
+          f"{sum(w >= LATCH_HI for w in loops)}, flip-flopping w<-1 {sum(w <= -1 for w in loops)}"
+          f"  (of {len(loops)}; largest {max(loops):+.3f}, smallest {min(loops):+.3f})")
 
 
 def spread(xs, fmt="{:.4g}"):
@@ -214,6 +276,7 @@ def summarize(path):
     print(f"strongest: bibite gen {bibites[best]['genes']['gen']} species "
           f"{bibites[best]['genes']['speciesID']}: {val:+.4f} into {out}")
     input_sweep(bibites)
+    wiring_report(bibites)
     settings = json.loads(z.read("settings.bb8settings").decode("utf-8-sig"))
     if len(settings["zones"]) > 1:
         pellets = json.loads(z.read("pellets.bb8scene").decode("utf-8-sig"))["pellets"]
