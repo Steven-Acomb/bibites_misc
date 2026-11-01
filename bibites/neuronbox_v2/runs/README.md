@@ -116,6 +116,32 @@ resolution from each save's species tree:
 - Sudden drops mark takeovers: 2025 08-08 → 08-11 (66 → 42) and v2
   10-30 → 11-01 (18 → 14).
 
+**"Adapted enough?" signals (2026-11-01).**
+
+**The 2025 run was not fixed-settings.**
+- Mutation settings changed several times: background variance, synapse
+  vs neuron share, relativity.
+- Meat decay was changed repeatedly.
+- Carnivores were added at 07-26, and a plant zone ("Zone 1") at 07-27.
+- So its population rise (~300 → ~1,250) is partly the added food, not
+  only adaptation. It can't calibrate plateau timing cleanly.
+- The one clean stretch is 07-20 → 07-26, with no settings changes:
+  herbivores went 310 → 533 while standing plant food fell 87 → 43 kE
+  (281 → 81 kE per herbivore), a real efficiency gain over gens ~127–352.
+
+**v2, standing plant food in zones, with fixed settings since the hex swap:**
+
+| Save | Sim h | Gen median | Alive | Plant kE on ground | Per bibite |
+|---|---|---|---|---|---|
+| p4 | 29.0 | 34 | 485 | 229 | 472 |
+| p10 | 40.9 | 40 | 432 | 155 | 359 |
+| 10-26 | 44.8 | 43 | 529 | 128 | 242 |
+| 10-28 | 54.0 | 46 | 572 | 136 | 237 |
+| 10-30 | 64.4 | 53 | 626 | 97 | 155 |
+| 11-01 | 77.6 | 64 | 515 | 91 | 177 |
+
+Still trending down, so not plateaued.
+
 **Input-dependent push in the 2025 run** (herbivores, same measurement as
 `run_stats.py`; v1 has 2 added layers, so its input→output paths are 3
 weights long, not 4):
