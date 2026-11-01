@@ -160,7 +160,8 @@ table below is recomputed with living bibites only.
 | 10-26 | 44.8 | 529 | 56 | 1.41× | 0.967 | 0.0048 / 0.040 / 62 |
 | 10-27 | 48.3 | 575 | 59 | 1.69× | 0.935 | 0.0061 / 0.031 / 133 |
 | 10-28 | 54.0 | 572 | 56 | 1.26× | 0.957 | 0.0086 / 0.070 / 247 |
-| 10-30 | 64.4 | 626 | 62 | 1.26× | 0.970 | 0.0115 / 0.050 / 375 |
+| 10-30 | 64.4 | 626* | 62 | 1.26× | 0.970 | 0.0115 / 0.050 / 375 |
+| 11-01 | 77.6 | 515 | 68 | 1.07× | 0.961 | 0.0187 / 0.068 / 473 |
 
 Notes:
 - p8→p9 ran overnight in the background at ~0.19 sim h per real hour
@@ -210,6 +211,18 @@ Notes:
     dropped from 92% to 43% as its residents rose 49 → 65. Median size went
     from ~0.95 to ~0.82.
   - Run speed 10-28 → 10-30: 10.4 sim h in ~53.5 real h.
+- **11-01:**
+  - Everyone descends from 12401. 99% descend from 12720 *textexae* (54.2 h,
+    gen 46), and 59% from 13203 *pizamampfus* (69.0 h, gen 57), which is the
+    top species (241 of 515).
+  - Sensitivity sweep, median per bibite, own state vs surroundings:
+    10-30: 0.026 vs 0.0039. 11-01: 0.0275 vs 0.0065. Surroundings grew ~1.7×
+    while own state stayed flat. Two points only, so watch it.
+  - Top surroundings inputs: Phero3Angle, MeatAngle, PlantCloseness.
+  - Mouth muscles ~8 and size ~0.75 in every zone.
+  - Run speed: 13.2 sim h in ~42 real h.
+
+(*10-30's 626 comes from the dead-filtered run_stats.)
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
