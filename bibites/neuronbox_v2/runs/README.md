@@ -258,6 +258,8 @@ at any output, from the added layers only.
 
 ## Test 2, hex phase (from 2026-10-25)
 
+Settings changes and their sim times are in [settings_log.md](settings_log.md).
+
 **The switch (sim time 28.8 h):**
 - Food zones were hot-swapped to the 7-zone hexagon. Each zone is radius
   1/3 and only one of fertility, biomass or pellet size differs from the
