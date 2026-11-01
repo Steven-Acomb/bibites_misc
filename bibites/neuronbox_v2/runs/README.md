@@ -126,21 +126,54 @@ resolution from each save's species tree:
 - So its population rise (~300 → ~1,250) is partly the added food, not
   only adaptation. It can't calibrate plateau timing cleanly.
 - The one clean stretch is 07-20 → 07-26, with no settings changes:
-  herbivores went 310 → 533 while standing plant food fell 87 → 43 kE
-  (281 → 81 kE per herbivore), a real efficiency gain over gens ~127–352.
+  herbivores went 310 → 533 while standing plant energy fell 435 → 215 kE
+  (1,405 → 405 E per herbivore), a real efficiency gain over gens ~127–352.
 
 **v2, standing plant food in zones, with fixed settings since the hex swap:**
 
-| Save | Sim h | Gen median | Alive | Plant kE on ground | Per bibite |
+| Save | Sim h | Gen median | Alive | Plant energy on ground (kE) | Per bibite (E) |
 |---|---|---|---|---|---|
-| p4 | 29.0 | 34 | 485 | 229 | 472 |
-| p10 | 40.9 | 40 | 432 | 155 | 359 |
-| 10-26 | 44.8 | 43 | 529 | 128 | 242 |
-| 10-28 | 54.0 | 46 | 572 | 136 | 237 |
-| 10-30 | 64.4 | 53 | 626 | 97 | 155 |
-| 11-01 | 77.6 | 64 | 515 | 91 | 177 |
+| p4 | 29.0 | 34 | 485 | 1,145 | 2,360 |
+| p10 | 40.9 | 40 | 432 | 775 | 1,795 |
+| 10-26 | 44.8 | 43 | 529 | 640 | 1,210 |
+| 10-28 | 54.0 | 46 | 572 | 680 | 1,185 |
+| 10-30 | 64.4 | 53 | 626 | 485 | 775 |
+| 11-01 | 77.6 | 64 | 515 | 455 | 885 |
 
 Still trending down, so not plateaued.
+
+**Correction (2026-11-01):** a pellet's `amount` is material, not energy.
+Plant material holds 5 E per unit and meat 10 (world material settings), so
+these tables now show energy, ×5 the earlier figures.
+- The earlier claim that ungrazed pellets "hold only 20% of their size" was
+  wrong: they are full size, and an ungrazed zone sits at its whole biomass
+  cap.
+- `run_stats.py`'s zone food % was numerically right all along and now uses
+  the real conversion.
+
+**The game's own log (`tools/game_log.py`, 2026-11-01).** Every save's
+`data.bin` holds the game's statistics, logged every 60 sim-seconds from the
+start of the world and downsampled with age. It's a regular series that
+doesn't depend on when saves happen.
+
+Bibite share of total energy, where the total is bibites + plants + meat +
+free (unspawned) biomass:
+
+| v2 sim h | 31 | 39 | 47 | 55 | 63 | 71 | 75 |
+|---|---|---|---|---|---|---|---|
+| bibite share | 28.1% | 28.5% | 31.5% | 34.1% | 35.3% | 32.4% | 31.7% |
+
+| 2025 sim h | 168 | 216 | 288 | 336 | 432 | 528 | 624 | 720 | 816 | 864 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| bibite share | 17.5% | 22.2% | 26.9% | 27.2% | 30.4% | 34.5% | 34.2% | 31.2% | 31.4% | 32.5% |
+
+- The 2025 run rose to ~31–35% by ~430 h and then held there for the rest
+  of the run, through its settings changes.
+- 2025's 384 h point (88.8 ME total, 4,528 bibites) is the 07-26 mass
+  carnivore spawn.
+- **v2 per doubling of time since the hex swap** (mean share): 34.9–41.0 h
+  29.0%, 41.0–53.2 h 30.3%, 53.2–77.6 h 32.6%. Gains per doubling are +1.3
+  then +2.3 points, not shrinking, so still climbing.
 
 **Input-dependent push in the 2025 run** (herbivores, same measurement as
 `run_stats.py`; v1 has 2 added layers, so its input→output paths are 3

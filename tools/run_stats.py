@@ -208,10 +208,6 @@ def summarize(path):
     print()
 
 
-# Ungrazed plant pellets hold ~20% of their nominal size, so an untouched zone
-# sits at ~20% of its biomass cap (measured on the empty 7zone_hex_test_0 world
-# and on test 2's starting save).
-UNGRAZED_FILL = 0.2
 ZONE_GENES = ["SizeRatio", "SpeedRatio", "MouthMusclesWAG", "ViewRadius", "Diet"]
 
 
@@ -220,6 +216,8 @@ def zone_breakdown(settings, pellets, bibites):
     zones = settings["zones"]
     world_r = settings["independents"]["SimulationSize"]["Value"]  # a radius
     density = settings["independents"]["biomassDensity"]["Value"]
+    # A pellet's "amount" is material; its energy is amount x energy density.
+    plant_energy = settings["materials"]["PlantSettings"]["energyDensity"]
 
     def zone_of(x, y):
         for zn in zones:
@@ -230,10 +228,10 @@ def zone_breakdown(settings, pellets, bibites):
 
     home = [zone_of(*b["transform"]["position"]) for b in bibites]
     names = [zn["name"] for zn in zones] + ["gaps"]
-    food = {g["zone"]: sum(p["pellet"]["amount"] for p in g["pellets"]
-                           if p["pellet"]["material"] == "Plant") for g in pellets}
+    food = {g["zone"]: plant_energy * sum(p["pellet"]["amount"] for p in g["pellets"]
+                                          if p["pellet"]["material"] == "Plant") for g in pellets}
 
-    print("\nper zone (food % = standing plant energy vs. the zone's ungrazed level)")
+    print("\nper zone (food % = standing plant energy vs. the zone's biomass cap)")
     print(f"{'zone':12} {'fert':>5} {'biom':>5} {'size':>5} {'food %':>6} "
           f"{'bibites':>7}  " + "  ".join(f"{g[:9]:>9}" for g in ZONE_GENES)
           + "  top species (share of zone)")
@@ -242,9 +240,9 @@ def zone_breakdown(settings, pellets, bibites):
         zn = next((zn for zn in zones if zn["name"] == name), None)
         if zn:
             r = zn["radius"] * (world_r if zn["radiusIsRelative"] else 1)
-            ungrazed = UNGRAZED_FILL * density * zn["biomassDensity"] * math.pi * r * r
+            cap = density * zn["biomassDensity"] * math.pi * r * r
             cols = (f"{zn['fertility']:5.2f} {zn['biomassDensity']:5.2f} "
-                    f"{zn['pelletSize']:5.2f} {100 * food.get(name, 0) / ungrazed:5.0f}%")
+                    f"{zn['pelletSize']:5.2f} {100 * food.get(name, 0) / cap:5.0f}%")
         else:
             cols = f"{'':5} {'':5} {'':5} {'':>6}"
         genes = "  ".join(
