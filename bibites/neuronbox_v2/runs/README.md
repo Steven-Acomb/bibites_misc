@@ -83,6 +83,39 @@ that every living herbivore descends from:
 - v2 at 10-30 (gen 62: 97% from gen 36) is in line with 2025 at a similar
   stage (gen 41: 90% from gen 17).
 
+**Ancestry depth over time (2026-11-01).** Measured at species
+resolution from each save's species tree:
+- **Whole population:** how many generations back everyone alive shares one
+  ancestor species.
+- **Pairwise:** the mean over random pairs of how far back each pair shares
+  an ancestor.
+
+| Run / save | Alive | Gen median | Whole population | Pairwise mean |
+|---|---|---|---|---|
+| 2025 07-19 | 308 | 71 | 34 | 19 |
+| 2025 07-20 | 310 | 127 | 38 | 31 |
+| 2025 07-23 | 537 | 283 | 89 | 54 |
+| 2025 07-26 | 533 | 352 | 67 | 48 |
+| 2025 07-31 | 1052 | 468 | 90 | 55 |
+| 2025 08-08 | 1256 | 623 | 85 | 66 |
+| 2025 08-11 | 1127 | 669 | 60 | 42 |
+| 2025 08-24 | 1037 | 690 | 81 | 44 |
+| 2025 09-07 | 1256 | 870 | 53 | 48 |
+| v2 10-26 | 529 | 43 | 43 (seed) | 30 |
+| v2 10-30 | 626 | 53 | 52 (seed) | 18 |
+| v2 11-01 | 515 | 64 | 28 | 14 |
+
+- In 2025, pairwise depth roughly doubled over the first ~300 generations
+  (~20–30 → ~50), then held at ~42–66 for the rest of the run, while the
+  population grew ~4×.
+- Pairwise depth (~50 generations) is far below the census population
+  (500–1,250). Pure neutral drift in a population that size would give a
+  depth on the order of the population size, so takeovers are much faster
+  than drift alone would produce. That is consistent with selection and/or
+  very uneven reproduction.
+- Sudden drops mark takeovers: 2025 08-08 → 08-11 (66 → 42) and v2
+  10-30 → 11-01 (18 → 14).
+
 **Input-dependent push in the 2025 run** (herbivores, same measurement as
 `run_stats.py`; v1 has 2 added layers, so its input→output paths are 3
 weights long, not 4):
