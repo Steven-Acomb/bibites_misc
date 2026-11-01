@@ -160,7 +160,7 @@ table below is recomputed with living bibites only.
 | 10-26 | 44.8 | 529 | 56 | 1.41× | 0.967 | 0.0048 / 0.040 / 62 |
 | 10-27 | 48.3 | 575 | 59 | 1.69× | 0.935 | 0.0061 / 0.031 / 133 |
 | 10-28 | 54.0 | 572 | 56 | 1.26× | 0.957 | 0.0086 / 0.070 / 247 |
-| 10-30 | 64.4 | 626* | 62 | 1.26× | 0.970 | 0.0115 / 0.050 / 375 |
+| 10-30 | 64.4 | 626 | 62 | 1.26× | 0.970 | 0.0115 / 0.050 / 375 |
 | 11-01 | 77.6 | 515 | 68 | 1.07× | 0.961 | 0.0187 / 0.068 / 473 |
 
 Notes:
@@ -221,8 +221,6 @@ Notes:
   - Top surroundings inputs: Phero3Angle, MeatAngle, PlantCloseness.
   - Mouth muscles ~8 and size ~0.75 in every zone.
   - Run speed: 13.2 sim h in ~42 real h.
-
-(*10-30's 626 comes from the dead-filtered run_stats.)
 
 ## Test 2 (started 2026-10-21, ~15 h at max speed)
 
