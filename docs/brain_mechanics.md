@@ -90,3 +90,40 @@ paraphrase.
 - PheroSense = tanh(sum / 5).
 - BibiteCloseness/Angle and PlantCloseness/Angle are weighted
   *concentrations* over everything in view, not just the nearest object.
+
+## Species assignment (from the game's code)
+
+Read 2026-11-01 from `GlobalLineageManager.CheckNewSpecies` and
+`Species.GeneticDistanceToIndividual` (decompiled v0.6.3.1, paraphrased).
+
+**Reference point.** Each species keeps a fixed reference: a snapshot of the
+individual that founded it. It never updates or averages, so drift away from
+it only accumulates.
+
+**Distance to that reference** is the sum of:
+- **Genes:** for each of the 35 genes, |difference| ÷ that gene's maximum
+  value (e.g. 1 for colours and Diet, 9 for WAGs, 200 for ViewRadius).
+- **Synapse weights:** for each shared synapse, |Δweight| ÷ (|reference
+  weight| + 1) ÷ √(number of shared synapses).
+- **Biases:** the mean |Δbias| over neurons with a non-zero bias.
+- **Structure:** disjoint synapses ÷ synapse count, plus toggled synapses ÷
+  shared count.
+
+**Threshold** = Species Genetic Span (default 1.5) + 0.05 × (active species
+− 20). It grows as more species are alive, which partly self-regulates.
+
+**New species.** When a bibite's distance reaches the threshold:
+1. If it is within half a threshold of an existing child species, it joins
+   that child.
+2. Otherwise it is flagged "mutant" the first time.
+3. The next time, a new child species is founded, with the bibite's parent
+   as the snapshot.
+
+**Measured on test 2's 11-01 save:**
+- 66 active species, so a threshold of 3.80. The median living bibite was
+  already 3.37 from its own species' reference.
+- Shares of that distance: genes 91%, added-layer weights 7%, biases 2%,
+  Easy Herbivore's own weights ~0%.
+- The top gene contributors (LayTime, PheroSense, ArmorWAG, ClockSpeed,
+  ColorR/B, fat genes) were each only ~0.10–0.14, so it is broad drift
+  across many genes, not one trait.
