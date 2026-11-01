@@ -164,6 +164,11 @@ each step has to pay. World-only levers, roughly in order of impact:
   no global (non-zone) settings in the animatable list.
 - **Saved** in the world's settings under `settingsChangers`. The loader
   reads it only from files of version ≥ 0.6.3.3.
+  - **⚠ Test before relying on this.** Saves record the game version, and
+    Steve's saves say `0.6.3.1`. If that's what this build writes, animators
+    might be silently dropped when a save is reloaded.
+  - To test: make a throwaway animator, save, reload, and see whether it
+    survives. (Unverified reading of `SerializationHelper.DeserializeScenario`.)
 - **Ideas these enable:**
   - seasons (cycling fertility per zone, possibly out of phase between
     zones);
