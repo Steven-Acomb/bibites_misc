@@ -27,24 +27,24 @@ behavior can emerge."
   - Doesn't fit: hand-designed circuits, seeded reflexes, or weights chosen
     to produce a particular action.
 
-## Timing and scale (Steve, 2026-11-01)
+## Scale and timing (Steve, 2026-11-01)
 
-- v3 can likely use a **bigger brain**. How far, before it becomes
-  unworkable, is something to test way down the line.
-- The game's creator has talked on YouTube for over a year about a big
-  engine change, "DOTS", that should greatly improve performance. There's no
-  timeline, so we won't plan around it in detail until v3 starts. Its
-  release may be what ends v2 and starts v3.
-- **Leads from the Discord, not authoritative** (`research_private/`):
-  - A member pinned in #bibite-talk (2026-01-22) that they could answer
-    questions "regarding 0.7 and DOTS".
-  - A pinned "0.7 feedback so far" list (2026-10-13) mentions new
-    brain-mutation parameters ("metavariance", "expressivity"), jaw strength
-    possibly higher than 0.6, and bugs like global fertility/biomass
-    settings not working.
-  - So a 0.7 build seems to be in testing. Mechanics may change enough
-    that v2's numbers and templates won't carry over directly. Check the
-    developer's own release notes when it lands.
+- **v3 can probably use a bigger brain.** How far it can go before the game
+  becomes unworkable will be tested much later.
+- **The developer's big engine update,** the "BIOME" update built on Unity
+  DOTS, is meant to improve performance a lot. The developer has discussed
+  it on YouTube for over a year, with no timeline. Don't plan around it in
+  detail until v3 starts. Its release may be what ends v2 and starts v3.
+- **What I've seen of it so far** (Claude, from the Discord pins: leads,
+  not verified):
+  - A pinned "0.7 feedback so far" post (2026-10-13) lists bugs and balance
+    notes. Testers mention DOTS, "metavariance", "expressivity" and "brain
+    bloat", which suggests the brain mutation model itself changes in 0.7.
+  - Another member said 0.7 "punishes jaw muscles".
+  - If so, a move to 0.7 means re-checking everything we've measured on
+    0.6.3.1: brain mechanics, feeding, species, and the `data.bin` format
+    `tools/game_log.py` reads. The way to do that is to decompile the new
+    build and re-verify against its panels.
 
 ## Claude's ideas (2026-11-01, unverified)
 
