@@ -1,3 +1,7 @@
 
 # Local-only research material (third-party tools, private Discord quotes)
 research_private/
+
+# Python bytecode
+__pycache__/
+*.pyc
