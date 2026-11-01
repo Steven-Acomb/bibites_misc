@@ -32,7 +32,8 @@ Format notes:
   (nScales-1 bytes) and points per scale (nScales bytes). Within a scale,
   point 0 is the newest.
 
-Point times are approximate (within one step of their scale).
+Point times follow the in-game graphs and Gene Analysis panel (values and
+times checked against both, 2026-11-01).
 
 Usage:
   python tools/game_log.py <world save .zip> [--since SIM_HOURS] [--genes] [--csv OUT_DIR]
