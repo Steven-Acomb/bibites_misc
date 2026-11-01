@@ -27,22 +27,24 @@ behavior can emerge."
   - Doesn't fit: hand-designed circuits, seeded reflexes, or weights chosen
     to produce a particular action.
 
-## Scale and timing (Steve, 2026-11-01)
+## Timing and scale (Steve, 2026-11-01)
 
-- **Brain size will likely grow for v3.** How far can be found by
-  experiment, way down the line, before it becomes unworkable.
-- **"BIOME".** The game's creator has talked on YouTube for over a year
-  about a big engine change his team is building, meant to greatly improve
-  performance. No timeline.
-  - Don't plan around it in detail until v3 actually starts.
-  - Its release may be what ends v2 and starts v3.
-- **Possibly related, unverified:** the community Discord discusses a
-  "0.7" with Unity DOTS (Unity's performance-oriented framework), and
-  Patreon has 0.6.4 alphas.
-- **For us:** everything here built from the decompiled code is specific to
-  v0.6.3.1: mechanics docs, `game_log.py`'s data.bin reader, input
-  definitions. Re-verify all of it on any new version. One reported example:
-  0.7 reportedly penalizes jaw muscles.
+- v3 can likely use a **bigger brain**. How far, before it becomes
+  unworkable, is something to test way down the line.
+- The game's creator has talked on YouTube for over a year about a big
+  engine change, "DOTS", that should greatly improve performance. There's no
+  timeline, so we won't plan around it in detail until v3 starts. Its
+  release may be what ends v2 and starts v3.
+- **Leads from the Discord, not authoritative** (`research_private/`):
+  - A member pinned in #bibite-talk (2026-01-22) that they could answer
+    questions "regarding 0.7 and DOTS".
+  - A pinned "0.7 feedback so far" list (2026-10-13) mentions new
+    brain-mutation parameters ("metavariance", "expressivity"), jaw strength
+    possibly higher than 0.6, and bugs like global fertility/biomass
+    settings not working.
+  - So a 0.7 build seems to be in testing. Mechanics may change enough
+    that v2's numbers and templates won't carry over directly. Check the
+    developer's own release notes when it lands.
 
 ## Claude's ideas (2026-11-01, unverified)
 
