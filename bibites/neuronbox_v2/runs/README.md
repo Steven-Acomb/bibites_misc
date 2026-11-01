@@ -251,6 +251,29 @@ most 5 at once. All were ≤3.2 min old and none laid eggs: a recurring
 mutation, not a lineage. With 84% of dead bodies being newborns, the data
 can't show that blindness itself kills.
 
+**Egg laying is near its decision threshold (2026-11-01).**
+
+How laying works (`BibiteEggLayingOrgan`): EggProduction > 0.15 builds
+eggs, and a finished egg is laid only while Want2Lay ≥ 0.25. Eggs are laid
+behind the parent, and babies hatch where the egg lies.
+
+In the templates Want2Lay is a sigmoid with bias 0, so 0.5: always lay.
+
+At 11-01:
+- The Want2Lay bias has drifted to a median of −0.81 (range −1.18 to +0.26).
+- The output is a median 0.294 (range 0.227–0.548), just above the 0.25
+  threshold. 15 of 515 bibites are currently below it, holding their eggs.
+- The gap from the median to the threshold is ~0.22 in pre-activation
+  units. Current input-dependent pushes are 0.02–0.07 (max).
+
+Sitting near a threshold means small, food-dependent signals could switch
+laying on and off, e.g. "lay where food is". Given 84% newborn starvation
+(above), that would have a large payoff, and it is a candidate for the
+first sensing-driven behavior.
+
+**Watch:** the Want2Lay response to PlantCloseness/NPlants in the sweep, and
+food density around eggs vs random spots.
+
 **Input-dependent push in the 2025 run** (herbivores, same measurement as
 `run_stats.py`; v1 has 2 added layers, so its input→output paths are 3
 weights long, not 4):
