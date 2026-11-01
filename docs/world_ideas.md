@@ -23,6 +23,23 @@ generations. Track this with the "surroundings" lines of `tools/run_stats.py`.
 - **Reduce the amount of plants.**
 - **Make the Center zone barren**, for diversity and because handling
   empty, risky areas is itself a selection pressure that rewards sensing.
+- **The full staged plan (2026-11-01):**
+  1. Herbivores to plateau.
+  2. Step the Center down to barren, then plateau again.
+  3. A meat-mirror hex world for carnivores: plateau, then lower global
+     fertility and possibly raise virgin spawns until near-pure predators
+     evolve.
+  4. Bring the predators into the herbivore world with the Center as a
+     normal meat zone, plateau, then ramp the Center back down to void. The
+     result is a ring world with predator/prey dynamics.
+- **Way down the road:** turn pheromone production cost off.
+- **After the ring world is done:** try the settings animators (new since
+  the 2025 run).
+- **Population size stays.** It's already near what the game can
+  meaningfully support, from Steve's experience.
+- **Design intent:** every choice so far aims to push the plateau as high as
+  possible, e.g. free brains, so behavioral improvements keep paying after
+  bodies settle.
 
 ## Claude's suggestions (2026-10-30, unverified hypotheses)
 
@@ -69,6 +86,96 @@ generations. Track this with the "surroundings" lines of `tools/run_stats.py`.
     it from noise; see the 2025 sweep baseline.
 - Removing the Center also removes 1/7 of the plants unless the other zones
   get it back, so it doubles as a first step of "reducing plants".
+
+## Claude's suggestions for raising the practical plateau (2026-11-01)
+
+**The ceiling.** The brain is a discrete-time recurrent network (3 sine
+layers, self-loops, L3→L1 and output→L1 feedback), so in practice a
+finite-state controller. Its building blocks:
+- **Latches:** a sine self-loop with weight ~1–2.26 holds 1 bit.
+- **Leaky memories:** self-loop weight < 1.
+- **Oscillators:** weight > 2.26, or the feedback loops.
+- **Clocks:** sine of TimeAlive or Minute.
+
+What evolution actually finds is likely well below that ceiling, because
+each step has to pay. World-only levers, roughly in order of impact:
+
+1. **Make memory and modes pay.** Pure reflexes are nearly optimal when food
+   sits still in view. Situations where the right action depends on the
+   past or on something out of view:
+   - food beyond view range (patchy food, barren areas);
+   - food that moves or changes over time (zone movement, settings
+     animators);
+   - intermittent danger (predators);
+   - delayed choices (see the egg-laying threshold in the runs README).
+2. **Pheromones as external memory.** A trail stores information in the
+   world. It outlasts any internal latch and is shared, so brain plus
+   environment can do more than the brain alone.
+3. **Gradual changes.** Each intermediate step needs a reward. Abrupt harsh
+   changes mostly select for blunt survival traits.
+4. **More search** (population, mutation step size) would help, but
+   population is at the game's practical limit (Steve). Larger mutation
+   steps also break working circuits more often, and infant mortality is
+   already 84%.
+
+### Research notes from the game's code (decompiled v0.6.3.1)
+
+**Pheromones** (`BibitePheromoneOrgan`, `PheromoneSpot`, `Pherosense`):
+
+- **Production.** PhereOut1–3 are ReLU outputs. Once a second, if
+  Σ output × production rate > 0.05, the bibite drops a spot with strength
+  output × `pheromoneProductionStrength`. The spot also records the
+  depositor's facing direction.
+  - Energy cost = Σ strength × `pheromoneProductionCost` per drop.
+  - In this world: rate 10, cost 0.01, so full output on one channel costs
+    0.1 E/s.
+- **Decay.** Strength drops linearly by 0.25 per second. A full-output
+  spot lasts ~40 s at rate 10, up to ~400 s at the maximum rate of 100.
+  So **the production rate setting also sets how long trails last.**
+- **Sensing.** It covers all directions within the PheroSense gene's radius;
+  it is not limited to the view cone.
+  - Each spot counts as strength ÷ distance.
+  - Inputs are PheroSense = tanh(Σ / 5), the angle to the strength-weighted
+    centre, and the averaged heading of the depositors (Phero*Heading).
+- **Already in use at 11-01:**
+  - 116 of 515 bibites produce channel 3 (blue) and ~30 each produce red
+    and green; 504 spots in the world.
+  - The PheroSense radius gene rose +44% since the hex swap
+    (directionality 1.00).
+  - Phero3Angle is the top "surroundings" input in the sweep.
+- **Related settings:** the "Prevent Red/Green/Blue Pheromone Production"
+  toggles, and `enableRedDeath` (off; when on it injects red pheromone near
+  a shrinking safe radius).
+
+**Settings animators** (`SettingsChanger`, `SettingsChangerManager`):
+
+- An animator multiplies the base value of one or more settings by a curve
+  over **sim time**.
+  - The curve is a spline: points (t, factor) with an interpolation type
+    and ease.
+  - It has a start time and an optional repeat. Repeating cycles forever;
+    non-repeating animators are deleted after their last point.
+- **What can be animated:** every numeric field of every **zone**:
+  - fertility, biomass density, pellet size, movement speed;
+  - position X/Y, radius (relative/absolute), inside radius;
+  - rectangle width/height.
+
+  An animated setting is locked from manual editing while animated. I found
+  no global (non-zone) settings in the animatable list.
+- **Saved** in the world's settings under `settingsChangers`. The loader
+  reads it only from files of version ≥ 0.6.3.3.
+- **Ideas these enable:**
+  - seasons (cycling fertility per zone, possibly out of phase between
+    zones);
+  - drifting or resizing zones;
+  - a gradual ramp, e.g. the barren-Center step-down as one smooth
+    animator instead of manual steps.
+
+**Zone options** (`ZoneSettings`):
+- **Movement:** None, Free (wanders), or Locked to Target (follows another
+  zone), with a speed.
+- **Distributions:** Flat circle, Center-to-edge, Edge-to-center, Ring
+  (density 0 at the edges), Flat ring, Rectangle.
 
 ## Void settings are deliberate (Steve, 2026-10-31)
 
