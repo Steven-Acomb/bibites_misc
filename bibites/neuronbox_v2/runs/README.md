@@ -219,6 +219,35 @@ Outputs stay ~0.3× the L3 response in all three, so internal structure is
 growing in step with expression. There is no sign yet of unused internal
 state piling up.
 
+**11-06 save (166.7 h, gen 122–139; +89 sim h since 11-01, ~0.75 sim h per
+real hour).**
+
+- **Population:** 960 alive, up from 515.
+- **Energy:** bibite share per doubling since 29.0 h is 28.6 → 32.7 → 31.6
+  → 35.1% (+4.0, −1.1, +3.5). Older windows rely on coarse log points.
+  Still climbing.
+- **Brains** (sweep, median per bibite):
+  - Own state 0.106 at outputs (was 0.028); surroundings 0.021 (was
+    0.0065); inside L3 0.28 / 0.053.
+  - Input-dependent push: median 0.058, max 0.20; 600 of 960 are above 0.05.
+  - Top surroundings inputs: Phero2Angle, Phero3Angle.
+  - Wiring: every kind has a mean |w| of ~0.07–0.10. No latches; the
+    largest self-loop is +0.46.
+- **Bodies, since 29 h** (gene log, directionality in brackets):
+  - SizeRatio 1.19 → 0.50 (0.84); HatchTime 21 → 71 (0.77).
+  - Living bibites' HatchTime/BroodTime median is now 0.83, about double
+    11-01's newborns, so babies are much bigger.
+  - MouthMusclesWAG is back down to ~3.6 (from ~8.2 on 11-01).
+  - HerdCohesionWeight 0.55 → 3.44 (0.92); HerdSeparationDistance 13 → 62.
+  - BrainAverageMutation 8.2 → 1.8 (median 1.6; 187 bibites at 0).
+- **Newborns:** median age at death is 2.4 min (was 1.7). The last hour had
+  3,911 births with 960 alive, ~4 per bibite per hour (was ~7).
+- **Want2Lay:** bias −0.86, output median 0.302; 38 of 960 are holding eggs.
+- **Lineage:** everyone descends from 13203 *pizamampfus* (gen 57), and 50%
+  from 15101 *lacerdus* (gen 110). The top species are now genus
+  *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
+- **Species tied to zones:** 1.09× (mixed).
+
 **Newborn mortality (2026-11-01).**
 
 From the game's log at 77.6 h, last hour:
