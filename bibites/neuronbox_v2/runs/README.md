@@ -266,6 +266,14 @@ Herbivore's own wiring and biases. Medians over 200 bibites.
 - **The one consistent effect:** older bibites heal more. TimeAlive → Want2Heal
   is +0.013, in the same direction for 87% of bibites. TimeAlive → Grab is
   +0.013 (75%).
+- **One curve shift, now handled by `run_stats.py`:** evolution raised
+  Accelerate's bias from 1.13 to 1.88, which is near tanh saturation. The
+  added layers' steady −0.25 pushes it back onto the steep part, so Easy
+  Herbivore's own "brake near plants" reflex got stronger (−0.35 → −0.51
+  across PlantCloseness 0→1).
+  - This is a real behavior change, but not new sensing.
+  - The behavior report credits the added layers only beyond a sweep with
+    them frozen, so offsets like this aren't counted as sensing.
 - **Pheromone production is rising regardless:** 295/196/70 of 960 bibites
   produce channels 2/3/1, and there are 1,687 spots in the world (504 on
   11-01). It doesn't depend on the inputs above, so it presumably comes from

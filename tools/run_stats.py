@@ -9,7 +9,10 @@ added layers start to matter.
 It also sweeps each input over its typical range in the population to show
 which inputs the added layers respond to, split into the bibite's own
 state/time and its surroundings (the second group is what sensing needs),
-and which outputs those inputs reach. A wiring report then compares how far
+and which outputs those inputs reach. A behavior report then measures the
+real change in each output's actual value (through base wiring, biases and the
+output's activation) and how consistent its direction is across bibites,
+which separates shared habits from per-bibite noise. A wiring report then compares how far
 each kind of added connection has drifted (feedback paths that rise above the
 rest are in use) and counts sine self-loops in the latch (1-bit memory) and
 chaotic regimes.
@@ -142,9 +145,8 @@ def sweep_effects(b, ranges):
     return effects
 
 
-def input_sweep(bibites):
-    """Which inputs the added layers respond to, measured fairly: each input
-    swept over its 5th-95th percentile range across the population."""
+def input_ranges(bibites):
+    """Each input's 5th-95th percentile across the population."""
     values = collections.defaultdict(list)
     for b in bibites:
         for n in b["brain"]["Nodes"]:
@@ -156,6 +158,103 @@ def input_sweep(bibites):
         lo, hi = xs[int(0.05 * (len(xs) - 1))], xs[int(0.95 * (len(xs) - 1))]
         if hi > lo:
             ranges[inp] = (lo, hi)
+    return ranges
+
+
+# Output activation functions by node Type (bibite.py: SIGMOID 1, LINEAR 2,
+# TANH 3, SINE 4, RELU 5).
+ACTIVATIONS = {1: lambda x: 1 / (1 + math.exp(-max(-60.0, min(60.0, x)))),
+               2: lambda x: x, 3: math.tanh, 4: math.sin, 5: lambda x: max(0.0, x)}
+
+
+def behavior_effects(b, ranges):
+    """{(input, output): change in the output's actual value} when the input
+    goes from the low to the high end of its range. Unlike sweep_effects this
+    includes the base wiring, biases and the output activation, so it is the
+    behavior change, not just the push into the output."""
+    nodes = {n["Index"]: n for n in b["brain"]["Nodes"]}
+    saved = {n["Desc"]: n["Value"] for n in nodes.values()}
+    kind = {n["Desc"]: n["archetype"] for n in nodes.values()}
+    incoming = collections.defaultdict(list)
+    for s in b["brain"]["Synapses"]:
+        if s["En"] and s["Weight"]:
+            incoming[nodes[s["NodeOut"]]["Desc"]].append(
+                (nodes[s["NodeIn"]]["Desc"], s["Weight"]))
+    added = [n for n in nodes.values() if is_added(n["Desc"])]
+    added.sort(key=lambda n: (n["Desc"][1], int(n["Desc"][3:])))
+    outputs = [n for n in nodes.values() if n["archetype"] == 1]
+
+    def run(override, frozen=False):
+        # frozen: the added layers keep their saved outputs, so their constant
+        # offset still shifts each output's operating point but they don't
+        # respond to the swept input.
+        val = dict(saved)
+        val.update(override)
+        for n in added:
+            layer = int(n["Desc"][1])
+            x = n["baseActivation"]
+            for src, w in incoming[n["Desc"]]:
+                if kind[src] == 0 or (is_added(src) and int(src[1]) == layer - 1):
+                    x += w * val[src]
+                else:
+                    x += w * saved[src]
+            val[n["Desc"]] = saved[n["Desc"]] if frozen else math.sin(x)
+        out = {}
+        for o in outputs:
+            x = o["baseActivation"] + sum(w * val[s] for s, w in incoming[o["Desc"]])
+            out[o["Desc"]] = ACTIVATIONS.get(o["Type"], lambda v: v)(x)
+        return out
+
+    effects = {}
+    for inp, (lo, hi) in ranges.items():
+        low, high = run({inp: lo}), run({inp: hi})
+        fz_low, fz_high = run({inp: lo}, True), run({inp: hi}, True)
+        for o in low:
+            total = high[o] - low[o]
+            # owed to the added layers *responding* to the input: total minus
+            # the same sweep with them frozen (a constant offset that only
+            # shifts the base reflex's operating point is not counted)
+            effects[(inp, o)] = (total, total - (fz_high[o] - fz_low[o]))
+    return effects
+
+
+def behavior_report(bibites, top=8):
+    """Real behavior changes owed to the added layers responding to inputs:
+    biggest input -> output effects on the outputs' actual values, minus the
+    same sweep with the added layers frozen (so a constant offset that merely
+    strengthens a base reflex isn't counted), and how consistent their
+    direction is across bibites (~50% = each bibite random, ~100% = shared)."""
+    ranges = input_ranges(bibites)
+    sample = random.Random(0).sample(bibites, min(SWEEP_SAMPLE, len(bibites)))
+    eff = collections.defaultdict(list)
+    for b in sample:
+        for key, (_total, from_added) in behavior_effects(b, ranges).items():
+            eff[key].append(from_added)
+    rows = []
+    for (inp, o), ds in eff.items():
+        pos = sum(d > 0 for d in ds)
+        same = max(pos, sum(d < 0 for d in ds)) / len(ds)
+        rows.append((inp, o, st.median(ds), st.median(abs(d) for d in ds), same))
+    print(f"\nactual behavior change from the added layers responding to inputs (output's "
+          f"real value, input swept over its typical range, minus the same sweep with the "
+          f"added layers frozen; median over {len(sample)} bibites; 'same sign' ~50% = "
+          f"random per bibite, ~100% = shared habit)")
+    for label, group in [("own state & time", lambda i: i in OWN_STATE),
+                         ("surroundings", lambda i: i not in OWN_STATE)]:
+        print(f"  {label}:")
+        for inp, o, med, size, same in sorted((r for r in rows if group(r[0])),
+                                              key=lambda r: -r[3])[:top]:
+            print(f"    {inp:16} -> {o:14} size {size:.4f}  median {med:+.4f}  same sign {same:4.0%}")
+    shared = [r for r in rows if r[4] >= 0.8 and r[3] >= 0.005]
+    print(f"  shared habits (same sign >= 80% and size >= 0.005): "
+          + (", ".join(f"{i}->{o} {m:+.3f} ({s:.0%})" for i, o, m, _, s in
+                       sorted(shared, key=lambda r: -r[3])) or "none"))
+
+
+def input_sweep(bibites):
+    """Which inputs the added layers respond to, measured fairly: each input
+    swept over its 5th-95th percentile range across the population."""
+    ranges = input_ranges(bibites)
     rng = random.Random(0)
     sample = rng.sample(bibites, min(SWEEP_SAMPLE, len(bibites)))
     per_input = collections.defaultdict(list)
@@ -276,6 +375,7 @@ def summarize(path):
     print(f"strongest: bibite gen {bibites[best]['genes']['gen']} species "
           f"{bibites[best]['genes']['speciesID']}: {val:+.4f} into {out}")
     input_sweep(bibites)
+    behavior_report(bibites)
     wiring_report(bibites)
     settings = json.loads(z.read("settings.bb8settings").decode("utf-8-sig"))
     if len(settings["zones"]) > 1:
