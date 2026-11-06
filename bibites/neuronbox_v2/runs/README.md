@@ -248,6 +248,29 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**What the strongest responses actually do (11-06).**
+
+Method: sweep each key input over its typical range and compute each
+output's *actual* value through its activation function, including Easy
+Herbivore's own wiring and biases. Medians over 200 bibites.
+
+- **Real behavior changes are small.** The largest is ~0.02 in output units,
+  even though the pre-activation pushes are ~0.1.
+  - Outputs mostly sit where their activation is flat: Want2Eat is tanh at
+    ~0.84, and the pheromone outputs are ReLU, often at 0.
+  - So my earlier "~0.1 push = visible behavior" rule of thumb overstated
+    it.
+- **Pheromone inputs:** changes of ≤0.004, and the direction is shared by
+  only 50–64% of bibites, i.e. essentially random per bibite. There is no
+  common pheromone-driven behavior yet.
+- **The one consistent effect:** older bibites heal more. TimeAlive → Want2Heal
+  is +0.013, in the same direction for 87% of bibites. TimeAlive → Grab is
+  +0.013 (75%).
+- **Pheromone production is rising regardless:** 295/196/70 of 960 bibites
+  produce channels 2/3/1, and there are 1,687 spots in the world (504 on
+  11-01). It doesn't depend on the inputs above, so it presumably comes from
+  output biases or constant pushes (inferred).
+
 **Newborn mortality (2026-11-01).**
 
 From the game's log at 77.6 h, last hour:
