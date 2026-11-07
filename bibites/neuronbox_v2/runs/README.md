@@ -248,6 +248,13 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**11-07 save (176.7 h, gen 130–146; +10 sim h in ~20 real h).**
+- 968 alive. Energy share in the last doubling window is 35.2%.
+- Sweep: own state 0.115, surroundings 0.022 (11-06: 0.106 / 0.021).
+- Shared habit TimeAlive→Want2Heal: +0.008 (84%). No latches.
+- BrainAverageMutation median 1.34 (11-06: 1.58; 164 bibites at 0).
+- HatchTime is still rising steadily: 75 now, directionality 1.00.
+
 **What the strongest responses actually do (11-06).**
 
 Method: sweep each key input over its typical range and compute each
