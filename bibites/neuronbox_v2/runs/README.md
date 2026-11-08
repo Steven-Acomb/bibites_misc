@@ -248,6 +248,21 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**11-08 save (190.5 h, gen 134–155; +13.8 sim h in ~28 real h).**
+- 945 alive. Energy share per doubling: 29.2 → 33.9 → 30.3 → 35.4%. Still
+  climbing, with the noisy middle dip.
+- Sweep: own state 0.115, surroundings 0.024. No shared habit passes the
+  80% / 0.005 bar now (age→heal dropped out). No latches.
+- **BrainAverageMutation median rebounded to 3.23** (from 1.34). The low
+  value was lineage-specific: 11-07's top species 15796 had collapsed brain
+  mutation and now accounts for only 24% of the ancestry.
+  - The new top species have higher brain mutation: 16558 *Godopedrus
+    energemanus* (137, median 3.4), 16104 *Sachnovdanielis marcosreyesius*
+    (102, 6.7) and 16097 *Lunaloutrae devinni* (98, 4.3).
+  - New genus names appearing means lines are diverging.
+  - Ancestry is unchanged: all from 13203, 50% from 15101.
+- HatchTime 85 and still rising; LayTime 43. Species tied to zones 1.21×.
+
 **11-07 save (176.7 h, gen 130–146; +10 sim h in ~20 real h).**
 - 968 alive. Energy share in the last doubling window is 35.2%.
 - Sweep: own state 0.115, surroundings 0.022 (11-06: 0.106 / 0.021).
