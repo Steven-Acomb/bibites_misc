@@ -14,6 +14,8 @@ Two "adapted enough?" readouts, both measured from a given sim time
 record):
 - Bibite share of total energy, averaged per doubling of time since then.
   Gains that shrink from one doubling to the next mean it's levelling off.
+- A timeline of that share and the population every --step sim hours, since
+  the doubling windows can hide a plateau that follows a sudden jump.
 - Per gene, net change of the population median vs. the total distance it
   moved ("directionality": ~1 = trending, ~0 = wandering), on an even
   8-step grid.
@@ -36,7 +38,7 @@ Point times follow the in-game graphs and Gene Analysis panel (values and
 times checked against both, 2026-11-01).
 
 Usage:
-  python tools/game_log.py <world save .zip> [--since SIM_HOURS] [--genes] [--csv OUT_DIR]
+  python tools/game_log.py <world save .zip> [--since SIM_HOURS] [--step H] [--genes] [--csv OUT_DIR]
 """
 
 import argparse
@@ -224,6 +226,27 @@ def doubling_report(share, since_h, end_h):
         prev = m
 
 
+def timeline_report(data, since_h, end_h, step_h):
+    """Bibite energy share and population averaged over fixed steps of sim
+    time, so steps (sudden jumps) and flat stretches are visible directly.
+    The doubling windows above can hide a plateau that follows a jump."""
+    share = bibite_share(data)
+    counts = [(t / 60, v[0]) for t, v in data["counts"][1]]
+    print(f"\ntimeline since {since_h:g} h, every {step_h:g} sim h "
+          "(mean over the logged points in each step)")
+    print(f"  {'sim h':>13}  {'bibite share':>12}  {'bibites+eggs':>12}  points")
+    a = since_h
+    while a < end_h:
+        b = min(a + step_h, end_h)
+        xs = [s for h, s in share if a <= h < b or (b == end_h and h == b)]
+        ns = [c for h, c in counts if a <= h < b or (b == end_h and h == b)]
+        if xs:
+            bar = "#" * round(st.mean(xs) - 20) if st.mean(xs) > 20 else ""
+            print(f"  {a:5.0f} - {b:5.0f}  {st.mean(xs):11.1f}%  {st.mean(ns):12.0f}  "
+                  f"{len(xs):5}  {bar}")
+        a = b
+
+
 def gene_trends(genes, since_h, end_h, steps=8):
     """Per gene over [since, end]: median then and now, net change as % of the
     gene's range, and directionality = |net| / distance travelled on an even
@@ -248,6 +271,8 @@ def main():
     p.add_argument("save")
     p.add_argument("--since", type=float, default=0.0,
                    help="sim hours when the world's settings last changed")
+    p.add_argument("--step", type=float, default=8.0,
+                   help="sim hours per row of the timeline (default 8)")
     p.add_argument("--genes", action="store_true", help="print per-gene trends")
     p.add_argument("--csv", help="write one CSV per stream into this folder")
     a = p.parse_args()
@@ -263,6 +288,7 @@ def main():
         cols, pts = val
         print(f"  {name:14} {len(pts):4} points from {pts[0][0] / 60:7.1f} h to {pts[-1][0] / 60:6.1f} h  ({', '.join(cols)})")
     doubling_report(bibite_share(data), a.since, end_h)
+    timeline_report(data, a.since, end_h, a.step)
     if a.genes:
         rows, pts = gene_trends(data["genes"], a.since, end_h)
         if rows is None:

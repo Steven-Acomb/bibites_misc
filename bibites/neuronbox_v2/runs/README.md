@@ -260,6 +260,12 @@ real hour).**
 - **Since ~145 h the share has been flat, possibly drifting down**: a
   plateau candidate ~50 sim h / ~25 gens long. That's shorter than one
   takeover cycle, so too early to call.
+- **Full timeline** (`game_log.py --since 29`, 8 h steps; bibite share):
+  - 28% at 29–37 h, rising to 35% at 53–69 h.
+  - Then a **decline** to ~29% over 85–133 h.
+  - Then the step to 36–37% at 141–189 h, and 33.5% at 189–200 h.
+  - So the share isn't monotonic: it rose, fell for ~60 sim h, and rose
+    again. The early peak sits around the 12401/13203 takeover era (inferred).
 - **Caveat on the doubling test:** windows that straddle a step mix
   pre-step and post-step levels, so they understate a plateau that follows
   a step.
