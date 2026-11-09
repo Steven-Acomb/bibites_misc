@@ -248,6 +248,26 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**11-09 save (200.0 h, gen 140–160; +9.5 sim h in ~19.5 real h).**
+- **The energy share rose in a step, not a slope** (game log, ~8 h points):
+  ~29% from 110–131 h (≈500 bibites), then a jump to 35–37% by 140–165 h
+  (810–1,050 bibites), flat to ~190 h, and 32.6% at 197 h.
+- **At the step (128 → 152 h), adults shrank and mouths shrank:**
+  - SizeRatio 0.86 → 0.49; MouthMusclesWAG 5.7 → 2.9.
+  - BroodTime dipped 91 → 70 and recovered to ~90.
+  - The step coincides with the founding of 15101 *lacerdus* (129 h,
+    gen 110), ancestor of 50% today (inferred link).
+- **Since ~145 h the share has been flat, possibly drifting down**: a
+  plateau candidate ~50 sim h / ~25 gens long. That's shorter than one
+  takeover cycle, so too early to call.
+- **Caveat on the doubling test:** windows that straddle a step mix
+  pre-step and post-step levels, so they understate a plateau that follows
+  a step.
+- 833 alive. Brain mutation median 3.77 (41 at 0). Sweep: own state 0.113,
+  surroundings 0.028. No shared habits; TimeAlive→EggProduction +0.016 (75%)
+  is closest. Species tied to zones 1.36× (11-06: 1.09, 11-08: 1.21). No
+  latches.
+
 **11-08 save (190.5 h, gen 134–155; +13.8 sim h in ~28 real h).**
 - 945 alive. Energy share per doubling: 29.2 → 33.9 → 30.3 → 35.4%. Still
   climbing, with the noisy middle dip.
