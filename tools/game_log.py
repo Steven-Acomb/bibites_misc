@@ -227,23 +227,28 @@ def doubling_report(share, since_h, end_h):
 
 
 def timeline_report(data, since_h, end_h, step_h):
-    """Bibite energy share and population averaged over fixed steps of sim
-    time, so steps (sudden jumps) and flat stretches are visible directly.
-    The doubling windows above can hide a plateau that follows a jump."""
-    share = bibite_share(data)
+    """Energy split and population averaged over fixed steps of sim time, so
+    steps (sudden jumps) and flat stretches are visible directly; the doubling
+    windows above can hide a plateau that follows a jump. Plants, meat and free
+    (unspawned) biomass are the environment the bibites have reshaped: a real
+    steady state needs all four shares to stop trending, not just the bibites'."""
+    shares = [(t / 60, [100 * x / sum(v) for x in v]) for t, v in data["biomass"][1] if sum(v) > 0]
     counts = [(t / 60, v[0]) for t, v in data["counts"][1]]
     print(f"\ntimeline since {since_h:g} h, every {step_h:g} sim h "
-          "(mean over the logged points in each step)")
-    print(f"  {'sim h':>13}  {'bibite share':>12}  {'bibites+eggs':>12}  points")
+          "(share of total energy, mean over the logged points in each step)")
+    print(f"  {'sim h':>13}  {'bibites':>7}  {'plants':>6}  {'meat':>5}  {'free':>5}  "
+          f"{'bibites+eggs':>12}  points  bibite share")
     a = since_h
     while a < end_h:
         b = min(a + step_h, end_h)
-        xs = [s for h, s in share if a <= h < b or (b == end_h and h == b)]
-        ns = [c for h, c in counts if a <= h < b or (b == end_h and h == b)]
-        if xs:
-            bar = "#" * round(st.mean(xs) - 20) if st.mean(xs) > 20 else ""
-            print(f"  {a:5.0f} - {b:5.0f}  {st.mean(xs):11.1f}%  {st.mean(ns):12.0f}  "
-                  f"{len(xs):5}  {bar}")
+        inside = lambda h: a <= h < b or (b == end_h and h == b)
+        rows = [v for h, v in shares if inside(h)]
+        ns = [c for h, c in counts if inside(h)]
+        if rows:
+            m = [st.mean(col) for col in zip(*rows)]
+            bar = "#" * round(m[0] - 20) if m[0] > 20 else ""
+            print(f"  {a:5.0f} - {b:5.0f}  {m[0]:6.1f}%  {m[1]:5.1f}%  {m[2]:4.1f}%  "
+                  f"{m[3]:4.1f}%  {st.mean(ns):12.0f}  {len(rows):6}  {bar}")
         a = b
 
 
