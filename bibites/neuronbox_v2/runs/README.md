@@ -248,6 +248,29 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**11-19 save (211.5 h, gen 150–167).** Resumed from the 11-09 save after
+the UPS failure. +11.5 sim h.
+- **The bibite share is sliding** (timeline): 37.8% (149–157 h) → 36% →
+  33.8% (189–197 h) → 31.8% (205–211 h). Population 1,070 → ~890.
+- **Energy split** (share of the ~2.8–2.9 ME total), 154 h → 202 h:
+  - bibites 37.0 → 33.6%
+  - meat 17.5 → 19.3%
+  - plants 12.4 → 11.3%
+  - free (unspawned) 33.1 → 35.8%
+
+  Over the whole run, standing plants fell from 21.5% (46 h) to ~11%.
+- **Newborn mortality is worsening again since ~195 h.**
+  - Births per 3 h rose from ~9.7k to ~12.3k, with population steady.
+  - Median age at death fell from 2.9 to 2.2 min; q75 from 14.8 to 4.4 min.
+
+  More babies die young, so more energy sits in bodies as meat. Inferred
+  cause of the slide.
+- **First shared habit driven by surroundings:** Phero3Angle → Herding
+  −0.006 (81% same sign). Also Speed → Want2Heal +0.006 (80%).
+  Surroundings sweep 0.035 (11-09: 0.028); own state 0.125.
+- Brain mutation median 5.0 (18 at 0). Species tied to zones 1.20×. No
+  latches. Top species: 17004 (141), 17398 (99), 17013 (77).
+
 **11-09 save (200.0 h, gen 140–160; +9.5 sim h in ~19.5 real h).**
 - **The energy share rose in a step, not a slope** (game log, ~8 h points):
   ~29% from 110–131 h (≈500 bibites), then a jump to 35–37% by 140–165 h
