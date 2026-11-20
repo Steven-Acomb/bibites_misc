@@ -248,6 +248,27 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**11-20 save (220.2 h, gen 156–171; +8.7 sim h).**
+- **The slide may be bottoming out:** bibites 32.1% (205–213 h) → 33.2%
+  (213–220 h); meat 21.7 → 20.1%. Plants ~11%, free ~35.5%. 802 alive.
+- **A fast shift at ~184–196 h** (gene log), the same time the share
+  slide and the birth surge began:
+  - PheroSense radius 209 → 60.
+  - HerdSeparationDistance 57 → 25 → ~15; HerdAlignmentWeight 2.6 → 1.5 →
+    0.5 by 219 h.
+  - Bibites went from wide pheromone sensing and loose, aligned flocks to
+    short-range sensing and tight, unaligned clumps.
+  - 17398 is now dominant (276 of 802).
+- **Pheromones are spreading:** 363 / 191 / 169 bibites produce channels
+  2 / 3 / 1; 2,871 spots (1,687 on 11-06).
+- **Shared habits (≥80% same sign):** Speed→Grab −0.015 (85%),
+  Speed→EggProduction +0.011 (83%), Speed→Want2Heal +0.011 (83%),
+  Phero2Angle→EggProduction −0.005 (81%), TimeAlive→Digestion +0.004 (80%).
+  - Caution: one species now holds 34% of the population, so some sharing
+    may be common ancestry rather than independent selection.
+- Surroundings sweep 0.034; own state 0.121. Brain mutation median 4.5.
+  Species tied to zones 1.01×. No latches.
+
 **11-19 save (211.5 h, gen 150–167).** Resumed from the 11-09 save after
 the UPS failure. +11.5 sim h.
 - **The bibite share is sliding** (timeline): 37.8% (149–157 h) → 36% →
