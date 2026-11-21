@@ -248,6 +248,27 @@ real hour).**
   *Godopedrus*: 15796 *leo* (240) and 15742 *leventianus* (178).
 - **Species tied to zones:** 1.09× (mixed).
 
+**11-21 save (230.3 h, gen 161–181; +10.1 sim h).**
+- Energy: bibites 32–33% through 205–229 h, 34.0% in the last partial hour;
+  meat 20.6 → 18.8%. Plants 11%, free 36%. 915 alive.
+- **17398 *Ghostspectrae karronzus*** (founded 205 h, gen 155) now holds
+  312 of 915.
+  - Its brains are nearly frozen: BrainAverageMutation median 0.91 and
+    BrainMutationSigma 0.0002 (others: 1.64 / 0.011).
+  - Population brain mutation median is 1.42 (140 at 0), down from 4.5 on
+    11-20.
+  - This is the second dominant line to switch brain mutation off (after
+    15796 on 11-07). Possible pattern: when most offspring die young, lines
+    whose offspring copy a working brain exactly may win (inferred,
+    unverified).
+- **Sweep: surroundings fell to 0.022** (11-20: 0.034); own state rose to
+  0.133.
+- **Shared habits are strengthening:** Speed→Grab −0.018 (91%),
+  Speed→Want2Heal +0.013 (87%), TimeAlive→Digestion +0.010 (83%),
+  Phero2Angle→EggProduction −0.006 (84%), Speed→Rotate −0.006 (83%).
+- Colour shifted toward red: ColorR ~0.93, ColorG ~0.5, ColorB ~0.03–0.06.
+- Species tied to zones 1.07×. No latches.
+
 **11-20 save (220.2 h, gen 156–171; +8.7 sim h).**
 - **The slide may be bottoming out:** bibites 32.1% (205–213 h) → 33.2%
   (213–220 h); meat 21.7 → 20.1%. Plants ~11%, free ~35.5%. 802 alive.
